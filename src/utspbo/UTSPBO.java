@@ -14,7 +14,8 @@ public class UTSPBO {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        POSFrame frame = new POSFrame();
+        frame.setVisible(true);
     }
     
 }
