@@ -63,6 +63,18 @@ public class POSFrame extends javax.swing.JFrame {
                     
                     float total = harga * jumlah;
                     daftarModel.setValueAt(total, baris, 5);
+                    
+                    float totalBelanja = 0.0f;
+                    total = 0.0f;
+                    for (int i = 0; i < jumlahBelanja; i++)
+                    {
+                        System.out.println("TOTAL " + i);
+                        total = (float)daftarModel.getValueAt(i, 5);
+                        totalBelanja = totalBelanja + total;
+                    }
+                    int totalBelanjaInt = (int)totalBelanja;
+                    
+                    totalBelanjaTextField.setText(String.format("%,d", totalBelanjaInt));
                 }
             }  
                     
@@ -90,6 +102,13 @@ public class POSFrame extends javax.swing.JFrame {
         HargaTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         daftarTable = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        totalBelanjaTextField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        dibayarTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        kembalianTextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -266,28 +285,64 @@ public class POSFrame extends javax.swing.JFrame {
             daftarTable.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
+        totalBelanjaTextField.setEditable(false);
+
+        jLabel4.setText("Total Belanja");
+
+        dibayarTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dibayarTextFieldActionPerformed(evt);
+            }
+        });
+        dibayarTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                dibayarTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dibayarTextFieldKeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("Jumlah Yang Dibayar");
+
+        kembalianTextField.setEditable(false);
+
+        jLabel6.setText("Kembalian");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(NamaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(HargaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(HargaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(kodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(kembalianTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(dibayarTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(totalBelanjaTextField, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -306,15 +361,29 @@ public class POSFrame extends javax.swing.JFrame {
                     .addComponent(HargaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(totalBelanjaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(dibayarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -332,27 +401,64 @@ public class POSFrame extends javax.swing.JFrame {
 
     private void kodeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kodeTextFieldActionPerformed
         String kodeInput = kodeTextField.getText();
-        
+
         Barang tempBarang;
-        
-        for (int i = 0; i < daftarBarang.size(); i++) {
+
+        for (int i = 0; i < daftarBarang.size(); i++)
+        {
             tempBarang = daftarBarang.get(i);
-            if (tempBarang.kode.equals(kodeInput)) {
+
+            //Warning: tempIndex digunakan untuk indexing baris
+            //dimulai dari index 0
+
+            int tempIndex = 0;
+
+            if (tempBarang.kode.equals(kodeInput))
+            {
+                tempIndex = jumlahBelanja;
+                jumlahBelanja++;
+
                 System.out.println("Barang ditemukan");
                 i = daftarBarang.size();
                 NamaTextField.setText(tempBarang.nama);
                 HargaTextField.setText(Float.toString(tempBarang.harga));
-                
-                daftarModel.setValueAt(jumlahBelanja+1, jumlahBelanja, 0);
-                daftarModel.setValueAt(kodeInput, jumlahBelanja, 1);
-                daftarModel.setValueAt(tempBarang.nama, jumlahBelanja, 2);
-                daftarModel.setValueAt(tempBarang.harga, jumlahBelanja, 3);
-                daftarModel.setValueAt(1, jumlahBelanja, 4);
-                jumlahBelanja++;
+
+                daftarModel.setValueAt(jumlahBelanja+1, tempIndex, 0);
+                daftarModel.setValueAt(kodeInput, tempIndex, 1);
+                daftarModel.setValueAt(tempBarang.nama, tempIndex, 2);
+                daftarModel.setValueAt(tempBarang.harga, tempIndex, 3);
+                daftarModel.setValueAt(1, tempIndex, 4);
+
             }
         }
-
     }//GEN-LAST:event_kodeTextFieldActionPerformed
+
+    private void dibayarTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dibayarTextFieldActionPerformed
+        // TODO add your handling code here:
+        
+        float totalBelanja = Float.valueOf(totalBelanjaTextField.getText());
+        int totalBelanjaInt = (int)totalBelanja;
+        
+        float dibayar = Integer.valueOf(dibayarTextField.getText());
+        int dibayarInt = (int)dibayar;
+        
+        int kembalianInt = dibayarInt - totalBelanjaInt;
+        kembalianTextField.setText(String.format("%,d", kembalianInt));
+    }//GEN-LAST:event_dibayarTextFieldActionPerformed
+
+    private void dibayarTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dibayarTextFieldKeyTyped
+        // TODO add your handling code here:  
+    }//GEN-LAST:event_dibayarTextFieldKeyTyped
+
+    private void dibayarTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dibayarTextFieldKeyReleased
+        // TODO add your handling code here:
+        
+        String dibayarString = dibayarTextField.getText();
+        dibayarString = dibayarString.replace(",", "");
+        
+        int dibayarInput = Integer.valueOf(dibayarString);
+        dibayarTextField.setText(String.format("%,d", dibayarInput));
+    }//GEN-LAST:event_dibayarTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -393,13 +499,20 @@ public class POSFrame extends javax.swing.JFrame {
     private javax.swing.JTextField HargaTextField;
     private javax.swing.JTextField NamaTextField;
     private javax.swing.JTable daftarTable;
+    private javax.swing.JTextField dibayarTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField kembalianTextField;
     private javax.swing.JTextField kodeTextField;
+    private javax.swing.JTextField totalBelanjaTextField;
     // End of variables declaration//GEN-END:variables
 
 }
