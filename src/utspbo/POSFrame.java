@@ -77,9 +77,9 @@ public class POSFrame extends javax.swing.JFrame {
                     totalBelanjaTextField.setText(String.format("%,d", totalBelanjaInt));
                 }
             }  
-                    
+
         }
-                
+
         );
     }
 
@@ -112,7 +112,6 @@ public class POSFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
-        setPreferredSize(new java.awt.Dimension(760, 720));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("Kode");
@@ -306,6 +305,7 @@ public class POSFrame extends javax.swing.JFrame {
         jLabel5.setText("Jumlah Yang Dibayar");
 
         kembalianTextField.setEditable(false);
+        kembalianTextField.setSelectionColor(new java.awt.Color(0, 0, 0));
 
         jLabel6.setText("Kembalian");
 
@@ -416,14 +416,14 @@ public class POSFrame extends javax.swing.JFrame {
             if (tempBarang.kode.equals(kodeInput))
             {
                 tempIndex = jumlahBelanja;
-                jumlahBelanja++;
-
+                
                 System.out.println("Barang ditemukan");
                 i = daftarBarang.size();
                 NamaTextField.setText(tempBarang.nama);
                 HargaTextField.setText(Float.toString(tempBarang.harga));
-
+                
                 daftarModel.setValueAt(jumlahBelanja+1, tempIndex, 0);
+                jumlahBelanja++;
                 daftarModel.setValueAt(kodeInput, tempIndex, 1);
                 daftarModel.setValueAt(tempBarang.nama, tempIndex, 2);
                 daftarModel.setValueAt(tempBarang.harga, tempIndex, 3);
@@ -435,15 +435,26 @@ public class POSFrame extends javax.swing.JFrame {
 
     private void dibayarTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dibayarTextFieldActionPerformed
         // TODO add your handling code here:
-        
-        float totalBelanja = Float.valueOf(totalBelanjaTextField.getText());
-        int totalBelanjaInt = (int)totalBelanja;
-        
-        float dibayar = Integer.valueOf(dibayarTextField.getText());
-        int dibayarInt = (int)dibayar;
-        
-        int kembalianInt = dibayarInt - totalBelanjaInt;
-        kembalianTextField.setText(String.format("%,d", kembalianInt));
+
+        String totalBelanjaString = totalBelanjaTextField.getText();
+        String dibayarString = dibayarTextField.getText();
+
+        // Replace comma with dot (assuming US locale)
+        totalBelanjaString = totalBelanjaString.replaceAll(",", "");
+        dibayarString = dibayarString.replaceAll(",", "");
+
+        try {
+            float totalBelanja = Float.valueOf(totalBelanjaString);
+            float dibayar = Float.valueOf(dibayarString);
+
+            float kembalianFloat = dibayar - totalBelanja;
+            int kembalianInt = (int) kembalianFloat;
+            kembalianTextField.setText(String.format("%,d", kembalianInt)); // Format kembalian with 2 decimal places
+
+        } catch (NumberFormatException e) {
+            // Handle the error, e.g., display a message to the user
+        }
+
     }//GEN-LAST:event_dibayarTextFieldActionPerformed
 
     private void dibayarTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dibayarTextFieldKeyTyped
@@ -458,6 +469,8 @@ public class POSFrame extends javax.swing.JFrame {
         
         int dibayarInput = Integer.valueOf(dibayarString);
         dibayarTextField.setText(String.format("%,d", dibayarInput));
+        Object[] kembalianInt = null;
+
     }//GEN-LAST:event_dibayarTextFieldKeyReleased
 
     /**
