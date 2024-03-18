@@ -5,6 +5,9 @@
 package utspbo;
 
 import java.util.ArrayList;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -12,11 +15,14 @@ import java.util.ArrayList;
  */
 public class POSFrame extends javax.swing.JFrame {
     ArrayList<Barang> daftarBarang;
+    
+    TableModel daftarModel;
+    
+    int jumlahBelanja = 0;
     /**
      * Creates new form POSFrame
      */
     public POSFrame() {
-        initComponents();
         daftarBarang = new ArrayList<Barang>();
         
         Barang i1 = new Barang();
@@ -38,6 +44,31 @@ public class POSFrame extends javax.swing.JFrame {
         daftarBarang.add(i3);
         
         System.out.println(daftarBarang.size());
+        
+        initComponents();
+        
+        daftarModel = daftarTable.getModel();
+        daftarModel.addTableModelListener(new TableModelListener()
+            {
+                
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                
+                if (e.getColumn() == 4)
+                {  
+                    int baris = e.getFirstRow();
+                    
+                    float harga = (float)daftarModel.getValueAt(baris, 3);
+                    int jumlah = (int)daftarModel.getValueAt(baris, 4);
+                    
+                    float total = harga * jumlah;
+                    daftarModel.setValueAt(total, baris, 5);
+                }
+            }  
+                    
+        }
+                
+        );
     }
 
     /**
@@ -58,7 +89,7 @@ public class POSFrame extends javax.swing.JFrame {
         NamaTextField = new javax.swing.JTextField();
         HargaTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        daftarTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -92,10 +123,9 @@ public class POSFrame extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(230, 230, 230));
         jScrollPane1.setBorder(null);
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(238, 238, 238));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        daftarTable.setAutoCreateRowSorter(true);
+        daftarTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        daftarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -217,23 +247,23 @@ public class POSFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setGridColor(new java.awt.Color(222, 222, 222));
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(10);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(250);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(70);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(70);
+        daftarTable.setToolTipText("");
+        daftarTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        daftarTable.setGridColor(new java.awt.Color(222, 222, 222));
+        daftarTable.setShowGrid(true);
+        jScrollPane1.setViewportView(daftarTable);
+        if (daftarTable.getColumnModel().getColumnCount() > 0) {
+            daftarTable.getColumnModel().getColumn(0).setResizable(false);
+            daftarTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+            daftarTable.getColumnModel().getColumn(1).setResizable(false);
+            daftarTable.getColumnModel().getColumn(1).setPreferredWidth(50);
+            daftarTable.getColumnModel().getColumn(2).setResizable(false);
+            daftarTable.getColumnModel().getColumn(2).setPreferredWidth(250);
+            daftarTable.getColumnModel().getColumn(3).setResizable(false);
+            daftarTable.getColumnModel().getColumn(3).setPreferredWidth(70);
+            daftarTable.getColumnModel().getColumn(4).setResizable(false);
+            daftarTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+            daftarTable.getColumnModel().getColumn(5).setPreferredWidth(70);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -312,6 +342,13 @@ public class POSFrame extends javax.swing.JFrame {
                 i = daftarBarang.size();
                 NamaTextField.setText(tempBarang.nama);
                 HargaTextField.setText(Float.toString(tempBarang.harga));
+                
+                daftarModel.setValueAt(jumlahBelanja+1, jumlahBelanja, 0);
+                daftarModel.setValueAt(kodeInput, jumlahBelanja, 1);
+                daftarModel.setValueAt(tempBarang.nama, jumlahBelanja, 2);
+                daftarModel.setValueAt(tempBarang.harga, jumlahBelanja, 3);
+                daftarModel.setValueAt(1, jumlahBelanja, 4);
+                jumlahBelanja++;
             }
         }
 
@@ -355,13 +392,13 @@ public class POSFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HargaTextField;
     private javax.swing.JTextField NamaTextField;
+    private javax.swing.JTable daftarTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField kodeTextField;
     // End of variables declaration//GEN-END:variables
 
