@@ -452,7 +452,7 @@ public class POSFrame extends javax.swing.JFrame {
             kembalianTextField.setText(String.format("%,d", kembalianInt)); // Format kembalian with 2 decimal places
 
         } catch (NumberFormatException e) {
-            // Handle the error, e.g., display a message to the user
+            System.out.println("Error mengkalkulasi.");
         }
 
     }//GEN-LAST:event_dibayarTextFieldActionPerformed
