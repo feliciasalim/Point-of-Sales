@@ -8,9 +8,6 @@
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
 
-<classpath>
-  <pathelement location="lib"/> </classpath>
-
 <project name="UTSPBO" default="default" basedir=".">
     <description>Builds, tests, and runs the project UTSPBO.</description>
     <import file="nbproject/build-impl.xml"/>
