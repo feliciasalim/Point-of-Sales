@@ -219,11 +219,13 @@ public class Login extends javax.swing.JFrame {
             
             //get username & password from user
             String Username = username.getText();
-            String Password = passwordHash(password.getText());
+            String Password = password.getText();
+            String hashedPassword = passwordHash(Password);
+            
             Statement stmt = conn.createStatement();
             
             //mysql query
-            String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+Password+"'";
+            String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+hashedPassword+"'";
             ResultSet rs = stmt.executeQuery(sql);
             
             if(rs.next()) {
@@ -235,6 +237,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Username or Password wrong");
                 username.setText("");
                 password.setText("");
+                System.out.println(hashedPassword);
             }
             
             conn.close();
@@ -246,31 +249,26 @@ public class Login extends javax.swing.JFrame {
            
     }//GEN-LAST:event_btnLoginActionPerformed
 
-//    public static String passwordHash (String password){
-//        try {
-//            MessageDirect md = MessageDirect.getInstance("SHA");
-//            md.update(password.getBytes());
-//            byte[] rbt = md.digest();
-//            StringBuilder sb = new StringBuilder();
-//            
-//            for (byte b: rbt){
-//                sb.append(String.format("%02x", b));
-//            }
-//            
-//            return sb.toString();
-//        }
-//        catch (Exception ex){
-//            System.out.println(ex);
-//        }
-//        
-//        return null;
-//    }
-    
-
-
-    public static String passwordHash(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt());
+    public static String passwordHash (String password){
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] rbt = md.digest();
+            StringBuilder sb = new StringBuilder();
+            
+            for (byte b: rbt){
+                sb.append(String.format("%02x", b));
+            }
+            
+            return sb.toString();
+        }
+        catch (Exception ex){
+            System.out.println(ex);
+        }
+        
+        return null;
     }
+   
 
 
     
