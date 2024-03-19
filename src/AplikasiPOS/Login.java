@@ -7,6 +7,7 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.security.MessageDigest;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class Login extends javax.swing.JFrame {
 
@@ -245,25 +246,32 @@ public class Login extends javax.swing.JFrame {
            
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    public static String passwordHash (String password){
-        try {
-            MessageDirect md = MessageDirect.getInstance("SHA1");
-            md.update(password.getBytes());
-            byte[] rbt = md.digest();
-            StringBuilder sb = new StringBuilder();
-            
-            for (byte b: rbt){
-                sb.append(String.format("%02x", b));
-            }
-            
-            return sb.toString();
-        }
-        catch (Exception ex){
-            System.out.println(ex);
-        }
-        
-        return null;
+//    public static String passwordHash (String password){
+//        try {
+//            MessageDirect md = MessageDirect.getInstance("SHA");
+//            md.update(password.getBytes());
+//            byte[] rbt = md.digest();
+//            StringBuilder sb = new StringBuilder();
+//            
+//            for (byte b: rbt){
+//                sb.append(String.format("%02x", b));
+//            }
+//            
+//            return sb.toString();
+//        }
+//        catch (Exception ex){
+//            System.out.println(ex);
+//        }
+//        
+//        return null;
+//    }
+    
+
+
+    public static String passwordHash(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
 
     
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
