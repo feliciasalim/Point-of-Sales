@@ -23,25 +23,31 @@ public class POSFrame extends javax.swing.JFrame {
      * Creates new form POSFrame
      */
     public POSFrame() {
-        daftarBarang = new ArrayList<Barang>();
         
-        Barang i1 = new Barang();
-        i1.kode = "000";
-        i1.nama = "milo";
-        i1.harga = 10000.0f;
-        daftarBarang.add(i1);
+        DBConnector.initDBConnection();
         
-        Barang i2 = new Barang();
-        i2.kode = "001";
-        i2.nama = "chiki";
-        i2.harga = 12000.0f;
-        daftarBarang.add(i2);
+        Barang.loadBarangFromDB();
+        System.out.println(Barang.daftarBarang.size());
         
-        Barang i3 = new Barang();
-        i3.kode = "002";
-        i3.nama = "oreo";
-        i3.harga = 11000.0f;
-        daftarBarang.add(i3);
+        daftarBarang = Barang.daftarBarang;
+        
+//        Barang i1 = new Barang();
+//        i1.kode = "000";
+//        i1.nama = "milo";
+//        i1.harga = 10000.0f;
+//        daftarBarang.add(i1);
+//        
+//        Barang i2 = new Barang();
+//        i2.kode = "001";
+//        i2.nama = "chiki";
+//        i2.harga = 12000.0f;
+//        daftarBarang.add(i2);
+//        
+//        Barang i3 = new Barang();
+//        i3.kode = "002";
+//        i3.nama = "oreo";
+//        i3.harga = 11000.0f;
+//        daftarBarang.add(i3);
         
         System.out.println(daftarBarang.size());
         
