@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package LoginMethod;
+package AplikasiPOS;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-/**
- *
- * @author ASUS
- */
+import java.security.MessageDigest;
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -40,7 +34,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        loginButton = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -84,23 +78,26 @@ public class Login extends javax.swing.JFrame {
 
         username.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         username.setForeground(new java.awt.Color(51, 51, 51));
-        username.setText("jTextField1");
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
 
         password.setForeground(new java.awt.Color(51, 51, 51));
-        password.setText("jPasswordField1");
         password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordActionPerformed(evt);
             }
         });
 
-        loginButton.setBackground(new java.awt.Color(255, 225, 0));
-        loginButton.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(51, 51, 51));
-        loginButton.setText("LOG IN");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setBackground(new java.awt.Color(255, 225, 0));
+        btnLogin.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(51, 51, 51));
+        btnLogin.setText("LOG IN");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -119,7 +116,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,7 +137,7 @@ public class Login extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(23, 23, 23))
@@ -204,36 +201,74 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_passwordActionPerformed
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        String DB_URL, Username, Password;
+        String DB_URL, SQLUsername, SQLPassword;
         DB_URL = "jdbc:mysql://localhost/pos_db";
-        Username = "root";
-        Password = "";
-//        try {
-//            Class.forName(JDBC_DRIVER);
-//            Connection conn = DriverManager.getConnection(DB_URL, Username, Password);
-//            Statement stmt = conn.createStatement();
-//            if("".equals(anObject:username.getText())){
-//                JOptionPane.showMessageDialog(new JFrame, message: "Wajib mengisi username.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
-//            }
-//            else if ("".equals(anObject:password.getText())){
-//                JOptionPane.showMessageDialog(new JFrame, message: "Password salah.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
-//            }
-//            else {
-//                Username = username.getText();
-//                Password = password.getText();
-//                    
-//            }
-//        }
-//        catch (Exception ex){
-//            System.out.println(ex);
-//        }
+        SQLUsername = "root";
+        SQLPassword = "";
+        
+        try {
+            //open connection
+            Class.forName(JDBC_DRIVER);
+            Connection conn = DriverManager.getConnection(DB_URL, SQLUsername, SQLPassword);
+            
+            //get username & password from user
+            String Username = username.getText();
+            String Password = passwordHash(password.getText());
+            Statement stmt = conn.createStatement();
+            
+            //mysql query
+            String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+Password+"'";
+            ResultSet rs = stmt.executeQuery(sql);
+            
+            if(rs.next()) {
+                dispose(); //if username && password = true, then close login page and go to POS Application
+                POSFrame POS = new POSFrame();
+                POS.show();
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Username or Password wrong");
+                username.setText("");
+                password.setText("");
+            }
+            
+            conn.close();
+            
+        }
+        catch (Exception ex) {
+            System.out.println(ex);
+        }
            
-    }//GEN-LAST:event_loginButtonActionPerformed
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    public static String passwordHash (String password){
+        try {
+            MessageDirect md = MessageDirect.getInstance("SHA1");
+            md.update(password.getBytes());
+            byte[] rbt = md.digest();
+            StringBuilder sb = new StringBuilder();
+            
+            for (byte b: rbt){
+                sb.append(String.format("%02x", b));
+            }
+            
+            return sb.toString();
+        }
+        catch (Exception ex){
+            System.out.println(ex);
+        }
+        
+        return null;
+    }
+
+    
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,6 +276,7 @@ public class Login extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -251,7 +287,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
