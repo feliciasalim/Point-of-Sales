@@ -64,10 +64,11 @@ public class Login extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 255, 102));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
+        jPanel1.setPreferredSize(new java.awt.Dimension(806, 500));
         jPanel1.setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setMinimumSize(new java.awt.Dimension(400, 500));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 1, 36)); // NOI18N
@@ -111,21 +112,19 @@ public class Login extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 14, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,15 +139,15 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(27, 27, 27)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(154, 154, 154))
+                .addGap(23, 23, 23))
         );
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(406, 0, 400, 612);
+        jPanel3.setBounds(406, 0, 400, 500);
 
         jPanel2.setBackground(new java.awt.Color(255, 225, 0));
 
@@ -184,7 +183,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 0, 0);
+        jPanel2.setBounds(0, 0, 563, 1758);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,7 +191,7 @@ public class Login extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(425, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,25 +213,25 @@ public class Login extends javax.swing.JFrame {
         DB_URL = "jdbc:mysql://localhost/pos_db";
         Username = "root";
         Password = "";
-        try {
-            Class.forName(JDBC_DRIVER);
-            Connection conn = DriverManager.getConnection(DB_URL, Username, Password);
-            Statement stmt = conn.createStatement();
-            if("".equals(anObject:username.getText())){
-                JOptionPane.showMessageDialog(new JFrame, message: "Wajib mengisi username.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
-            }
-            else if ("".equals(anObject:password.getText())){
-                JOptionPane.showMessageDialog(new JFrame, message: "Password salah.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
-            }
-            else {
-                Username = username.getText();
-                Password = password.getText();
-                    
-            }
-        }
-        catch (Exception ex){
-            System.out.println(ex);
-        }
+//        try {
+//            Class.forName(JDBC_DRIVER);
+//            Connection conn = DriverManager.getConnection(DB_URL, Username, Password);
+//            Statement stmt = conn.createStatement();
+//            if("".equals(anObject:username.getText())){
+//                JOptionPane.showMessageDialog(new JFrame, message: "Wajib mengisi username.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
+//            }
+//            else if ("".equals(anObject:password.getText())){
+//                JOptionPane.showMessageDialog(new JFrame, message: "Password salah.", title:"Error", messageType:JOptionPane.ERROR_MESSAGE);
+//            }
+//            else {
+//                Username = username.getText();
+//                Password = password.getText();
+//                    
+//            }
+//        }
+//        catch (Exception ex){
+//            System.out.println(ex);
+//        }
            
     }//GEN-LAST:event_loginButtonActionPerformed
 
