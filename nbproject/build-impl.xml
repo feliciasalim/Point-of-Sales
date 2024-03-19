@@ -351,6 +351,7 @@ is divided into following sections:
                     </src>
                     <classpath>
                         <path path="@{classpath}"/>
+                        <pathelement location="${basedir}/lib"/>
                     </classpath>
                     <modulepath>
                         <path path="@{modulepath}"/>
