@@ -251,7 +251,7 @@ public class Login extends javax.swing.JFrame {
 
     public static String passwordHash (String password){
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("MD5"); //hash password using MD5 hashing algorithm
             md.update(password.getBytes());
             byte[] rbt = md.digest();
             StringBuilder sb = new StringBuilder();
