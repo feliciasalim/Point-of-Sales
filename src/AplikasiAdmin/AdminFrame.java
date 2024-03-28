@@ -359,14 +359,11 @@ public class AdminFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-<<<<<<< HEAD
     private com.toedter.calendar.JDateChooser jDateChooser1;
-=======
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
->>>>>>> origin/master
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -374,20 +371,14 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-<<<<<<< HEAD
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-=======
     private javax.swing.JSeparator jSeparator1;
->>>>>>> origin/master
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-<<<<<<< HEAD
-=======
     private javax.swing.JTextField jTextField2;
->>>>>>> origin/master
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
