@@ -1,5 +1,6 @@
 package AplikasiPOS;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,7 +8,8 @@ import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.security.MessageDigest;
-import org.mindrot.jbcrypt.BCrypt;
+import java.sql.Statement;
+import java.sql.Timestamp;
 
 public class Login extends javax.swing.JFrame {
 
@@ -201,7 +203,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         DBConnector.initDBConnection();
-
+        
+          
         if (DBConnector.connection != null) {
             String Username = username.getText();
             String Password = password.getText();
@@ -213,6 +216,12 @@ public class Login extends javax.swing.JFrame {
                         dispose(); //if username && password = true, then close login page and go to POS Application
                         POSFrame POS = new POSFrame();
                         POS.show();
+                        String action = "Login";
+                        String query = "INSERT INTO detail_login_logout (username, tanggal, log_activity) VALUES ('"+Username+"', '"+new Timestamp(System.currentTimeMillis())+"', '"+action+"')";
+                        PreparedStatement stmt2 = DBConnector.connection.prepareStatement(query);
+                        stmt2.executeUpdate();
+
+                        
                     } else {
                         JOptionPane.showMessageDialog(this, "Username or Password wrong");
                         username.setText("");
@@ -224,10 +233,11 @@ public class Login extends javax.swing.JFrame {
             catch (Exception ex) {
                 System.out.println(ex);
             }
+            
         } else {
             System.out.println("Database connection failed!");
         }
-           
+         
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public static String passwordHash (String password){
