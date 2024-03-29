@@ -43,6 +43,7 @@ public class Login extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        closeBtn = new javax.swing.JButton();
 
         jInternalFrame1.setVisible(true);
 
@@ -126,6 +127,8 @@ public class Login extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(51, 51, 51));
         btnLogin.setText("LOG IN");
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogin.setFocusPainted(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -135,17 +138,24 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 1, 8)); // NOI18N
         jLabel5.setText("BY TECHIE, 2024");
 
+        closeBtn.setBackground(new java.awt.Color(255, 225, 0));
+        closeBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 24)); // NOI18N
+        closeBtn.setText("X");
+        closeBtn.setBorder(null);
+        closeBtn.setBorderPainted(false);
+        closeBtn.setContentAreaFilled(false);
+        closeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        closeBtn.setFocusPainted(false);
+        closeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(29, 29, 29))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,11 +165,25 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(closeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(78, 78, 78)
+                .addGap(16, 16, 16)
+                .addComponent(closeBtn)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(jLabel2)
@@ -171,7 +195,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(25, 25, 25))
         );
@@ -210,16 +234,15 @@ public class Login extends javax.swing.JFrame {
             String Password = password.getText();
             String hashedPassword = passwordHash(Password);
             String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+hashedPassword+"'";
+            
             try (PreparedStatement stmt = DBConnector.connection.prepareStatement(sql)) {
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
                         dispose(); //if username && password = true, then close login page and go to POS Application
                         POSFrame POS = new POSFrame();
-                        POS.show();
-                        String action = "Login";
-                        String query = "INSERT INTO detail_login_logout (username, tanggal, log_activity) VALUES ('"+Username+"', '"+new Timestamp(System.currentTimeMillis())+"', '"+action+"')";
-                        PreparedStatement stmt2 = DBConnector.connection.prepareStatement(query);
-                        stmt2.executeUpdate();
+                        POS.show(); 
+                        
+                        
 
                         
                     } else {
@@ -232,6 +255,17 @@ public class Login extends javax.swing.JFrame {
             } 
             catch (Exception ex) {
                 System.out.println(ex);
+            }
+            String action = "Login";
+            String query = "INSERT INTO detail_login_logout (username, tanggal, log_activity) VALUES ('"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+
+            try {
+                Connection conn = DBConnector.connection;
+                Statement stmt2 = conn.createStatement();
+                stmt2.executeUpdate(query);
+            }
+            catch(Exception ex){
+                System.out.println("Error");
             }
             
         } else {
@@ -267,6 +301,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
 
+    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        dispose();
+    }//GEN-LAST:event_closeBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -274,6 +312,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton closeBtn;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
