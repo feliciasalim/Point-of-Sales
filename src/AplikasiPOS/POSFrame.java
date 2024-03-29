@@ -1,5 +1,8 @@
 package AplikasiPOS;
-
+import AplikasiPOS.Login;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -357,6 +360,11 @@ public class POSFrame extends javax.swing.JFrame {
         kembaliBtn.setBackground(new java.awt.Color(255, 225, 0));
         kembaliBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
         kembaliBtn.setText("KEMBALI");
+        kembaliBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kembaliBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -539,14 +547,31 @@ public class POSFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dibayarTextFieldKeyReleased
 
+    
     private void LogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBtnActionPerformed
-        dispose();
-        POSProject.main();
+//        DBConnector.initDBConnection();
+////        String Username = Login.getString();
+//        try {
+//            String action = "Logout";
+//            String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LO','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+//            Connection conn = DBConnector.connection;
+//            Statement stmt = conn.createStatement();
+//            stmt.executeUpdate(query);
+//        }
+//        catch(Exception ex){
+//            System.out.println("Error");
+//        }
+//        dispose();
+//        POSProject.main();
     }//GEN-LAST:event_LogoutBtnActionPerformed
 
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
 //        String query = ""
     }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void kembaliBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliBtnActionPerformed
+            
+    }//GEN-LAST:event_kembaliBtnActionPerformed
 
     /**
      * @param args the command line arguments

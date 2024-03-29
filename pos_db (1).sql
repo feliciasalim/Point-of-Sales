@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 04:29 PM
+-- Generation Time: Mar 29, 2024 at 07:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `pos_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `admin_username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_username`, `password`) VALUES
+('felicia', '827ccb0eea8a706c4c34a16891f84e7b');
 
 -- --------------------------------------------------------
 
@@ -48,29 +66,22 @@ INSERT INTO `barang` (`kode`, `nama`, `harga`) VALUES
 --
 
 CREATE TABLE `detail_login_logout` (
-  `log_id` varchar(100) NOT NULL,
+  `log_id` int(100) NOT NULL,
+  `prefix` varchar(10) NOT NULL,
   `username` varchar(20) NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `log_activity` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Triggers `detail_login_logout`
+-- Dumping data for table `detail_login_logout`
 --
-DELIMITER $$
-CREATE TRIGGER `auto_increment_log_id` BEFORE INSERT ON `detail_login_logout` FOR EACH ROW BEGIN
-  DECLARE next_id VARCHAR(10);
 
-  SET next_id = LPAD(CAST(SUBSTRING(MAX(log_id), 3) AS UNSIGNED) + 1, 5, '0');
-
-  IF next_id IS NULL THEN
-    SET next_id = '00001';
-  END IF;
-
-  SET NEW.log_id = CONCAT('TR', next_id);
-END
-$$
-DELIMITER ;
+INSERT INTO `detail_login_logout` (`log_id`, `prefix`, `username`, `tanggal`, `log_activity`) VALUES
+(2, 'TI', 'user1', '2024-03-29 17:19:05', 'Login'),
+(3, 'TI', 'user1', '2024-03-29 17:21:11', 'Login'),
+(4, 'TI', 'user1', '2024-03-29 17:21:57', 'Login'),
+(5, 'TI', 'felicia', '2024-03-29 18:17:01', 'Login');
 
 -- --------------------------------------------------------
 
@@ -128,6 +139,12 @@ INSERT INTO `user` (`username`, `password`) VALUES
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_username`);
+
+--
 -- Indexes for table `barang`
 --
 ALTER TABLE `barang`
@@ -137,7 +154,7 @@ ALTER TABLE `barang`
 -- Indexes for table `detail_login_logout`
 --
 ALTER TABLE `detail_login_logout`
-  ADD PRIMARY KEY (`log_id`);
+  ADD PRIMARY KEY (`log_id`) USING BTREE;
 
 --
 -- Indexes for table `transaksi`
@@ -160,6 +177,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `barang`
   MODIFY `kode` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `detail_login_logout`
+--
+ALTER TABLE `detail_login_logout`
+  MODIFY `log_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

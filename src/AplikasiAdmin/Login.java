@@ -1,4 +1,4 @@
-package AplikasiPOS;
+package AplikasiAdmin;
 
 
 import java.sql.Connection;
@@ -70,23 +70,23 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 225, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(562, 1478));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/pngimg.com - minions_PNG30.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/pngimg.com - minions_PNG31.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 577, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(847, Short.MAX_VALUE))
+                .addContainerGap(883, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -100,7 +100,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("LOG IN");
+        jLabel1.setText("ADMIN \nLOG IN");
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel2.setText("USERNAME");
@@ -228,10 +228,10 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         DBConnector.initDBConnection();
         
-        String Username = username.getText();
+        String  AdminUsername = username.getText();
         String Password = password.getText();
         String hashedPassword = passwordHash(Password);
-        String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+hashedPassword+"'";
+        String sql = "SELECT * FROM admin WHERE admin_username = '"+AdminUsername+"' AND password = '"+hashedPassword+"'";
 
         try {
             Connection conn = DBConnector.connection;
@@ -239,10 +239,10 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(sql); 
                 if (rs.next()) {
                     dispose(); //if username && password = true, then close login page and go to POS Application
-                    POSFrame POS = new POSFrame();
-                    POS.show();
-                    LoggedIn(Username);
-                    getString(Username);
+                    AdminFrame Admin = new AdminFrame();
+                    Admin.show();
+                    LoggedIn(AdminUsername);
+                    getString(AdminUsername);
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or Password wrong");
