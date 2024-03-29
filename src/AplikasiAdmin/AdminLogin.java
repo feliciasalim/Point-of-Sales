@@ -4,19 +4,18 @@ package AplikasiAdmin;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.security.MessageDigest;
 import java.sql.Statement;
 import java.sql.Timestamp;
 
-public class Login extends javax.swing.JFrame {
+public class AdminLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginFrame
      */
-    public Login() {
+    public AdminLogin() {
         setUndecorated(true);
         initComponents();
         
