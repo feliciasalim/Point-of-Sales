@@ -32,6 +32,19 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jFrame1 = new javax.swing.JFrame();
+        jFrame2 = new javax.swing.JFrame();
+        jFrame3 = new javax.swing.JFrame();
+        menuBar1 = new java.awt.MenuBar();
+        menu1 = new java.awt.Menu();
+        menu2 = new java.awt.Menu();
+        menuBar2 = new java.awt.MenuBar();
+        menu3 = new java.awt.Menu();
+        menu4 = new java.awt.Menu();
+        jInternalFrame2 = new javax.swing.JInternalFrame();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,6 +69,75 @@ public class Login extends javax.swing.JFrame {
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
+        jFrame2.getContentPane().setLayout(jFrame2Layout);
+        jFrame2Layout.setHorizontalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame2Layout.setVerticalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame3Layout = new javax.swing.GroupLayout(jFrame3.getContentPane());
+        jFrame3.getContentPane().setLayout(jFrame3Layout);
+        jFrame3Layout.setHorizontalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame3Layout.setVerticalGroup(
+            jFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        menu1.setLabel("File");
+        menuBar1.add(menu1);
+
+        menu2.setLabel("Edit");
+        menuBar1.add(menu2);
+
+        menu3.setLabel("File");
+        menuBar2.add(menu3);
+
+        menu4.setLabel("Edit");
+        menuBar2.add(menu4);
+
+        jInternalFrame2.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
+        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
+        jInternalFrame2Layout.setHorizontalGroup(
+            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame2Layout.setVerticalGroup(
+            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -239,8 +321,9 @@ public class Login extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery(sql); 
                 if (rs.next()) {
                     dispose(); //if username && password = true, then close login page and go to POS Application
-                    POSFrame POS = new POSFrame();
-                    POS.show();
+                    Menu menu = new Menu();
+                    menu.show();
+                    menu.setLocationRelativeTo(null);
                     LoggedIn(Username);
                     getString(Username);
 
@@ -284,7 +367,7 @@ public class Login extends javax.swing.JFrame {
         
         try {
             String action = "Login";
-            String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TI','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+            String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LI','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
 
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
@@ -296,8 +379,13 @@ public class Login extends javax.swing.JFrame {
         return null;
     }
     
-    public static String getString (String username){
-        return username;
+    private static String USERNAME; 
+    public static void getString (String username){
+        USERNAME = username;
+    }
+    
+    public static String storedUsername(){
+        return USERNAME;
     }
 
     
@@ -317,7 +405,11 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton closeBtn;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
+    private javax.swing.JFrame jFrame3;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -326,6 +418,15 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+    private java.awt.Menu menu1;
+    private java.awt.Menu menu2;
+    private java.awt.Menu menu3;
+    private java.awt.Menu menu4;
+    private java.awt.MenuBar menuBar1;
+    private java.awt.MenuBar menuBar2;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
