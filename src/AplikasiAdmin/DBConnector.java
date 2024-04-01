@@ -35,4 +35,8 @@ public class DBConnector {
             
     }
 
+    static void insertItem(String kode, String nama, String harga) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
