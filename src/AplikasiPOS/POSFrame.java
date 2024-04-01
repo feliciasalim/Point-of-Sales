@@ -609,20 +609,21 @@ public class POSFrame extends javax.swing.JFrame {
         String Username = Login.storedUsername();
         try {
             String action = "Transaksi";
-            String sql = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TR','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')"; 
+            String total =  totalBelanjaTextField.getText();
+            String sql = "INSERT INTO transaksi (prefix, username, tanggal, total_pembayaran, activity) VALUES ('TR ID ','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"', '"+total+"','"+action+"')"; 
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql); 
             int rowCount = daftarModel.getRowCount();
             int columnCount = daftarModel.getColumnCount();
                 try {
-                    String get_id = "SELECT prefix, log_id, tanggal FROM detail_login_logout WHERE prefix = 'TR' ORDER BY tanggal DESC LIMIT 1";
+                    String get_id = "SELECT prefix, id_transaksi, tanggal FROM transaksi WHERE prefix = 'TR ID ' ORDER BY tanggal DESC LIMIT 1";
                     ResultSet rs2 = stmt.executeQuery(get_id);
                     if (rs2.next()){
-                        String id = String.valueOf(rs2.getInt("log_id"));
+                        String id = String.valueOf(rs2.getInt("id_transaksi"));
                         String prefix = rs2.getString("prefix");
                         String tanggal = rs2.getString("tanggal");
-                        String transactionID = prefix + " - " + id;
+                        String transactionID = prefix + id;
                         for (int row = 0; row < rowCount; row++){
                             StringBuilder insertQuery = new StringBuilder ("INSERT INTO detail_transaksi (tanggal, id_transaksi, kode, nama, harga, qty,  harga_total) VALUES ");
                             insertQuery.append("('").append(tanggal).append("', '").append(transactionID).append("', ");
@@ -655,16 +656,10 @@ public class POSFrame extends javax.swing.JFrame {
         catch (Exception ex) {
             System.out.println(ex);
         }   
-        DefaultTableModel defaultModel = (DefaultTableModel) daftarModel;
-        for (int i = 0; i< defaultModel.getRowCount(); i++) {
-            defaultModel.removeRow(0);
-        }
-        kodeTextField.setText("");
-        NamaTextField.setText("");
-        HargaTextField.setText("");
-        totalBelanjaTextField.setText("");
-        dibayarTextField.setText("");
-        kembalianTextField.setText("");
+        dispose();
+        POSFrame frame = new POSFrame();
+        frame.show();
+        frame.setLocationRelativeTo(null);
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -34,7 +34,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         
         tableModel.setRowCount(0); // Clear existing data
         try {//show all activity log 
-            String sql = "SELECT * FROM detail_login_logout"    ;
+            String sql = "SELECT * FROM detail_login_logout";
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql); 
@@ -47,6 +47,18 @@ public class UserActivityLog extends javax.swing.JFrame {
                 String activity = rs.getString("log_activity");
                 Object[] rowData = {waktu, userID, username, activity};
                 tableModel.addRow(rowData);
+            }
+            String sql2 = "SELECT * FROM transaksi";
+            ResultSet rs2 = stmt.executeQuery(sql2); 
+            while (rs2.next()) {
+                String waktuT = rs2.getString("tanggal");
+                String idT = String.valueOf(rs2.getInt("id_transaksi"));
+                String prefixT = rs2.getString("prefix");
+                String userIDT = prefixT + idT;
+                String usernameT = rs2.getString("username");
+                String activityT = rs2.getString("activity");
+                Object[] rowDataT = {waktuT, userIDT, usernameT, activityT};
+                tableModel.addRow(rowDataT);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
