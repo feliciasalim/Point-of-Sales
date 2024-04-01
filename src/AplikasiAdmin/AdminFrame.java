@@ -1089,6 +1089,7 @@ private void fetchAndPopulateTransactionDetails(String idTransaksi) {
         int num = Integer.parseInt(idTransaksi.replaceAll("\\D", ""));
         String sqluser = "SELECT * FROM transaksi WHERE id_transaksi = '"+num+"'";
         ResultSet rsu = st.executeQuery(sqluser);
+       
         while (rsu.next()){
         String user = rsu.getString("username");
         transUser.setText(user);
