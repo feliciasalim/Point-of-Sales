@@ -1,49 +1,58 @@
 package AplikasiPOS;
 
-import static AplikasiPOS.ActivityLog.daftarLog;
+import AplikasiPOS.DBConnector;
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.Connection;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.SwingConstants;
 
 public class UserActivityLog extends javax.swing.JFrame {
-
-    /**
-     * Creates new form UserActivityLog
-     */
     
     TableModel daftarModel;
+    
     public UserActivityLog() {
         setUndecorated(true);
         initComponents();
-        
         DBConnector.initDBConnection();
         
-        try {
-            Statement stmt = (Statement) DBConnector.connection.createStatement();
-            String sql = "SELECT * FROM detail_login_logout";
-            
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next())
-            {
-                String Waktu = rs.getString("tanggal");
-                String ID = rs.getString ("prefix" + " - " + String.valueOf(rs.getInt("log_id")));
-                String Username = rs.getString ("username");
-                String Aktivitas = rs.getString ("log_activity");
-                String arrDataLog[] = {Waktu, ID, Username, Aktivitas};
-                DefaultTableModel tabelModel = (DefaultTableModel)daftarTable1.getModel();
-                tabelModel.addRow(arrDataLog);
+        DefaultTableModel tableModel = (DefaultTableModel) daftarTable1.getModel();
+        //set table contents centered
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        daftarTable1.setDefaultRenderer(String.class, centerRenderer);
+        daftarTable1.setDefaultRenderer(Integer.class, centerRenderer);
+        
+        tableModel.setRowCount(0); // Clear existing data
+        try {//show all activity log 
+            String sql = "SELECT * FROM detail_login_logout"    ;
+            Connection conn = DBConnector.connection;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql); 
+            while (rs.next()) {
+                String waktu = rs.getString("tanggal");
+                String id = String.valueOf(rs.getInt("log_id"));
+                String prefix = rs.getString("prefix");
+                String userID = prefix + " - " + id;
+                String username = rs.getString("username");
+                String activity = rs.getString("log_activity");
+                Object[] rowData = {waktu, userID, username, activity};
+                tableModel.addRow(rowData);
             }
-        }
-        catch (Exception ex){
-            System.out.println(ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         
+     
         daftarTable1.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
         daftarTable1.getTableHeader().setBackground(Color.decode("#FFE100"));
     }
@@ -93,7 +102,7 @@ public class UserActivityLog extends javax.swing.JFrame {
 
         daftarTable1.setAutoCreateRowSorter(true);
         daftarTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        daftarTable1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        daftarTable1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         daftarTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -395,7 +404,11 @@ public class UserActivityLog extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -404,10 +417,7 @@ public class UserActivityLog extends javax.swing.JFrame {
                         .addGap(76, 76, 76)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -436,6 +446,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         menu.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -476,14 +487,10 @@ public class UserActivityLog extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;

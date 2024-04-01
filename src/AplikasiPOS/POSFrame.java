@@ -1,16 +1,22 @@
 package AplikasiPOS;
-import AplikasiPOS.Login;
+import static AplikasiPOS.Login.LoggedIn;
+import static AplikasiPOS.Login.getString;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 
@@ -25,7 +31,7 @@ public class POSFrame extends javax.swing.JFrame {
      * Creates new form POSFrame
      */
     public POSFrame() {
-//        setUndecorated(true);
+        setUndecorated(true);
         DBConnector.initDBConnection();
         
         
@@ -33,29 +39,17 @@ public class POSFrame extends javax.swing.JFrame {
         System.out.println(Barang.daftarBarang.size());
         
         daftarBarang = Barang.daftarBarang;
-        
-//        Barang i1 = new Barang();
-//        i1.kode = "000";
-//        i1.nama = "milo";
-//        i1.harga = 10000.0f;
-//        daftarBarang.add(i1);
-//        
-//        Barang i2 = new Barang();
-//        i2.kode = "001";
-//        i2.nama = "chiki";
-//        i2.harga = 12000.0f;
-//        daftarBarang.add(i2);
-//        
-//        Barang i3 = new Barang();
-//        i3.kode = "002";
-//        i3.nama = "oreo";
-//        i3.harga = 11000.0f;
-//        daftarBarang.add(i3);
+
         
         System.out.println(daftarBarang.size());
         
         initComponents();
         daftarModel = daftarTable.getModel();
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer(); 
+        rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        daftarTable.setDefaultRenderer(String.class, rightRenderer);
+        daftarTable.setDefaultRenderer(Float.class, rightRenderer);
+        daftarTable.setDefaultRenderer(Integer.class, rightRenderer);
         daftarTable.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
         daftarTable.getTableHeader().setBackground(Color.decode("#FFE100"));
         daftarModel.addTableModelListener(new TableModelListener()
@@ -451,7 +445,6 @@ public class POSFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(kodeTextField))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(NamaTextField)))
@@ -463,26 +456,21 @@ public class POSFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(254, 254, 254)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(totalBelanjaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(dibayarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(totalBelanjaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(dibayarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -544,6 +532,7 @@ public class POSFrame extends javax.swing.JFrame {
         String kodeInput = kodeTextField.getText();
 
         Barang tempBarang;
+
 
         for (int i = 0; i < daftarBarang.size(); i++)
         {
@@ -616,7 +605,66 @@ public class POSFrame extends javax.swing.JFrame {
 
     
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        DBConnector.initDBConnection();
+        String Username = Login.storedUsername();
+        try {
+            String action = "Transaksi";
+            String sql = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TR','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')"; 
+            Connection conn = DBConnector.connection;
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql); 
+            int rowCount = daftarModel.getRowCount();
+            int columnCount = daftarModel.getColumnCount();
+                try {
+                    String get_id = "SELECT prefix, log_id, tanggal FROM detail_login_logout WHERE prefix = 'TR' ORDER BY tanggal DESC LIMIT 1";
+                    ResultSet rs2 = stmt.executeQuery(get_id);
+                    if (rs2.next()){
+                        String id = String.valueOf(rs2.getInt("log_id"));
+                        String prefix = rs2.getString("prefix");
+                        String tanggal = rs2.getString("tanggal");
+                        String transactionID = prefix + " - " + id;
+                        for (int row = 0; row < rowCount; row++){
+                            StringBuilder insertQuery = new StringBuilder ("INSERT INTO detail_transaksi (tanggal, id_transaksi, kode, nama, harga, qty,  harga_total) VALUES ");
+                            insertQuery.append("('").append(tanggal).append("', '").append(transactionID).append("', ");
+
+                            for (int col = 1; col < columnCount; col++) { 
+                                Object cellValue = daftarModel.getValueAt(row, col);
+                                    if (cellValue != null) {
+                                        if (cellValue instanceof String || cellValue instanceof Timestamp) {
+                                            insertQuery.append("'").append(cellValue).append("', ");
+                                        } else {
+                                            insertQuery.append(cellValue).append(", ");
+                                        }
+                                } else {
+                                    insertQuery.append("NULL, ");
+                                }
+                            }
+                            insertQuery.setLength(insertQuery.length() - 2);
+                            insertQuery.append(")");
+
+                            stmt.executeUpdate(insertQuery.toString());
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    System.out.println(ex);
+                } 
+            
+        } 
         
+        catch (Exception ex) {
+            System.out.println(ex);
+        }   
+        DefaultTableModel defaultModel = (DefaultTableModel) daftarModel;
+        for (int i = 0; i< defaultModel.getRowCount(); i++) {
+            defaultModel.removeRow(0);
+        }
+        kodeTextField.setText("");
+        NamaTextField.setText("");
+        HargaTextField.setText("");
+        totalBelanjaTextField.setText("");
+        dibayarTextField.setText("");
+        kembalianTextField.setText("");
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

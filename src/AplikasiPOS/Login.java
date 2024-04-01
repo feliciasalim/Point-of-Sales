@@ -333,8 +333,7 @@ public class Login extends javax.swing.JFrame {
                     password.setText("");
                     System.out.println(hashedPassword);
                 }
-
-        } 
+           } 
         catch (Exception ex) {
             System.out.println(ex);
         }

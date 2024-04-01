@@ -500,6 +500,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //LOGOUT BUTTON
         jButton3.setBackground(Color.white);
         int Button = JOptionPane.YES_NO_OPTION;
         Button = JOptionPane.showConfirmDialog (null, "Are you sure?","WARNING", Button);
@@ -511,7 +512,7 @@ public class Menu extends javax.swing.JFrame {
         
             try {
                 String action = "Logout";
-                String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TI','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+                String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LO','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
 
                 Connection conn = DBConnector.connection;
                 Statement stmt = conn.createStatement();
