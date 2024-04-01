@@ -1,11 +1,22 @@
 package AplikasiPOS;
-import AplikasiPOS.Login;
+import static AplikasiPOS.Login.LoggedIn;
+import static AplikasiPOS.Login.getString;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 
@@ -20,37 +31,27 @@ public class POSFrame extends javax.swing.JFrame {
      * Creates new form POSFrame
      */
     public POSFrame() {
-//        setUndecorated(true);
+        setUndecorated(true);
         DBConnector.initDBConnection();
+        
         
         Barang.loadBarangFromDB();
         System.out.println(Barang.daftarBarang.size());
         
         daftarBarang = Barang.daftarBarang;
-        
-//        Barang i1 = new Barang();
-//        i1.kode = "000";
-//        i1.nama = "milo";
-//        i1.harga = 10000.0f;
-//        daftarBarang.add(i1);
-//        
-//        Barang i2 = new Barang();
-//        i2.kode = "001";
-//        i2.nama = "chiki";
-//        i2.harga = 12000.0f;
-//        daftarBarang.add(i2);
-//        
-//        Barang i3 = new Barang();
-//        i3.kode = "002";
-//        i3.nama = "oreo";
-//        i3.harga = 11000.0f;
-//        daftarBarang.add(i3);
+
         
         System.out.println(daftarBarang.size());
         
         initComponents();
-        
         daftarModel = daftarTable.getModel();
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer(); 
+        rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        daftarTable.setDefaultRenderer(String.class, rightRenderer);
+        daftarTable.setDefaultRenderer(Float.class, rightRenderer);
+        daftarTable.setDefaultRenderer(Integer.class, rightRenderer);
+        daftarTable.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        daftarTable.getTableHeader().setBackground(Color.decode("#FFE100"));
         daftarModel.addTableModelListener(new TableModelListener()
             {
                 
@@ -96,6 +97,24 @@ public class POSFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jFrame1 = new javax.swing.JFrame();
+        jFrame2 = new javax.swing.JFrame();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu7 = new javax.swing.JMenu();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuBar6 = new javax.swing.JMenuBar();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        jPopupMenu3 = new javax.swing.JPopupMenu();
+        jPopupMenu4 = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -112,9 +131,9 @@ public class POSFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         kembalianTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        LogoutBtn = new javax.swing.JButton();
         clearBtn = new javax.swing.JButton();
-        kembaliBtn = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,6 +145,52 @@ public class POSFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
+        jFrame2.getContentPane().setLayout(jFrame2Layout);
+        jFrame2Layout.setHorizontalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame2Layout.setVerticalGroup(
+            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jMenu5.setText("File");
+        jMenuBar4.add(jMenu5);
+
+        jMenu6.setText("Edit");
+        jMenuBar4.add(jMenu6);
+
+        jMenu7.setText("File");
+        jMenuBar5.add(jMenu7);
+
+        jMenu8.setText("Edit");
+        jMenuBar5.add(jMenu8);
+
+        jMenu9.setText("File");
+        jMenuBar6.add(jMenu9);
+
+        jMenu10.setText("Edit");
+        jMenuBar6.add(jMenu10);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -163,6 +228,7 @@ public class POSFrame extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         daftarTable.setAutoCreateRowSorter(true);
+        daftarTable.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         daftarTable.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         daftarTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -339,30 +405,23 @@ public class POSFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel6.setText("Kembalian");
 
-        LogoutBtn.setBackground(new java.awt.Color(255, 225, 0));
-        LogoutBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
-        LogoutBtn.setText("LOGOUT");
-        LogoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutBtnActionPerformed(evt);
-            }
-        });
-
         clearBtn.setBackground(new java.awt.Color(255, 225, 0));
-        clearBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
+        clearBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         clearBtn.setText("OK");
+        clearBtn.setFocusPainted(false);
         clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearBtnActionPerformed(evt);
             }
         });
 
-        kembaliBtn.setBackground(new java.awt.Color(255, 225, 0));
-        kembaliBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
-        kembaliBtn.setText("KEMBALI");
-        kembaliBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setBackground(new java.awt.Color(255, 225, 0));
+        jButton2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        jButton2.setText("KEMBALI");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kembaliBtnActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -372,9 +431,10 @@ public class POSFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -385,17 +445,18 @@ public class POSFrame extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(kodeTextField))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 1, Short.MAX_VALUE)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(NamaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(NamaTextField)))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(HargaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -409,15 +470,8 @@ public class POSFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dibayarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(kembaliBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(LogoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,7 +483,7 @@ public class POSFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NamaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(HargaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
@@ -448,16 +502,17 @@ public class POSFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(kembaliBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 98, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))))
         );
+
+        jButton1.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -467,7 +522,7 @@ public class POSFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 735, Short.MAX_VALUE)
         );
 
         pack();
@@ -477,6 +532,7 @@ public class POSFrame extends javax.swing.JFrame {
         String kodeInput = kodeTextField.getText();
 
         Barang tempBarang;
+
 
         for (int i = 0; i < daftarBarang.size(); i++)
         {
@@ -548,30 +604,75 @@ public class POSFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_dibayarTextFieldKeyReleased
 
     
-    private void LogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBtnActionPerformed
-//        DBConnector.initDBConnection();
-////        String Username = Login.getString();
-//        try {
-//            String action = "Logout";
-//            String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LO','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
-//            Connection conn = DBConnector.connection;
-//            Statement stmt = conn.createStatement();
-//            stmt.executeUpdate(query);
-//        }
-//        catch(Exception ex){
-//            System.out.println("Error");
-//        }
-//        dispose();
-//        POSProject.main();
-    }//GEN-LAST:event_LogoutBtnActionPerformed
-
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
-//        String query = ""
+        DBConnector.initDBConnection();
+        String Username = Login.storedUsername();
+        try {
+            String action = "Transaksi";
+            String sql = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TR','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')"; 
+            Connection conn = DBConnector.connection;
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql); 
+            int rowCount = daftarModel.getRowCount();
+            int columnCount = daftarModel.getColumnCount();
+                try {
+                    String get_id = "SELECT prefix, log_id, tanggal FROM detail_login_logout WHERE prefix = 'TR' ORDER BY tanggal DESC LIMIT 1";
+                    ResultSet rs2 = stmt.executeQuery(get_id);
+                    if (rs2.next()){
+                        String id = String.valueOf(rs2.getInt("log_id"));
+                        String prefix = rs2.getString("prefix");
+                        String tanggal = rs2.getString("tanggal");
+                        String transactionID = prefix + " - " + id;
+                        for (int row = 0; row < rowCount; row++){
+                            StringBuilder insertQuery = new StringBuilder ("INSERT INTO detail_transaksi (tanggal, id_transaksi, kode, nama, harga, qty,  harga_total) VALUES ");
+                            insertQuery.append("('").append(tanggal).append("', '").append(transactionID).append("', ");
+
+                            for (int col = 1; col < columnCount; col++) { 
+                                Object cellValue = daftarModel.getValueAt(row, col);
+                                    if (cellValue != null) {
+                                        if (cellValue instanceof String || cellValue instanceof Timestamp) {
+                                            insertQuery.append("'").append(cellValue).append("', ");
+                                        } else {
+                                            insertQuery.append(cellValue).append(", ");
+                                        }
+                                } else {
+                                    insertQuery.append("NULL, ");
+                                }
+                            }
+                            insertQuery.setLength(insertQuery.length() - 2);
+                            insertQuery.append(")");
+
+                            stmt.executeUpdate(insertQuery.toString());
+                        }
+                    }
+                }
+                catch (Exception ex) {
+                    System.out.println(ex);
+                } 
+            
+        } 
+        
+        catch (Exception ex) {
+            System.out.println(ex);
+        }   
+        DefaultTableModel defaultModel = (DefaultTableModel) daftarModel;
+        for (int i = 0; i< defaultModel.getRowCount(); i++) {
+            defaultModel.removeRow(0);
+        }
+        kodeTextField.setText("");
+        NamaTextField.setText("");
+        HargaTextField.setText("");
+        totalBelanjaTextField.setText("");
+        dibayarTextField.setText("");
+        kembalianTextField.setText("");
     }//GEN-LAST:event_clearBtnActionPerformed
 
-    private void kembaliBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kembaliBtnActionPerformed
-            
-    }//GEN-LAST:event_kembaliBtnActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        dispose();
+        Menu menu = new Menu();
+        menu.show();
+        menu.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -604,28 +705,50 @@ public class POSFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new POSFrame().setVisible(true);
+                UIDefaults uiDefaults = UIManager.getDefaults();
+                uiDefaults.put("activeCaption", new javax.swing.plaf.ColorUIResource(Color.red));
+                uiDefaults.put("activeCaptionText", new javax.swing.plaf.ColorUIResource(Color.white));
+                JFrame.setDefaultLookAndFeelDecorated(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HargaTextField;
-    private javax.swing.JButton LogoutBtn;
     private javax.swing.JTextField NamaTextField;
     private javax.swing.JButton clearBtn;
     private javax.swing.JTable daftarTable;
     private javax.swing.JTextField dibayarTextField;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuBar jMenuBar6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
+    private javax.swing.JPopupMenu jPopupMenu3;
+    private javax.swing.JPopupMenu jPopupMenu4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton kembaliBtn;
     private javax.swing.JTextField kembalianTextField;
     private javax.swing.JTextField kodeTextField;
     private javax.swing.JTextField totalBelanjaTextField;

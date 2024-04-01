@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2024 at 07:19 PM
+-- Generation Time: Apr 01, 2024 at 04:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `pos_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_admin`
+--
+
+CREATE TABLE `activity_admin` (
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `admin_username` varchar(50) NOT NULL,
+  `Activity` varchar(20) NOT NULL,
+  `Status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -78,10 +91,37 @@ CREATE TABLE `detail_login_logout` (
 --
 
 INSERT INTO `detail_login_logout` (`log_id`, `prefix`, `username`, `tanggal`, `log_activity`) VALUES
-(2, 'TI', 'user1', '2024-03-29 17:19:05', 'Login'),
-(3, 'TI', 'user1', '2024-03-29 17:21:11', 'Login'),
-(4, 'TI', 'user1', '2024-03-29 17:21:57', 'Login'),
-(5, 'TI', 'felicia', '2024-03-29 18:17:01', 'Login');
+(1, 'LI', 'user1', '2024-04-01 13:31:27', 'Login'),
+(2, 'TR', 'user1', '2024-04-01 13:31:47', 'Transaksi'),
+(3, 'LI', 'user1', '2024-04-01 13:33:18', 'Login'),
+(4, 'TR', 'user1', '2024-04-01 13:33:51', 'Transaksi'),
+(5, 'LO', 'user1', '2024-04-01 13:34:06', 'Logout'),
+(6, 'LI', 'user1', '2024-04-01 14:01:46', 'Login'),
+(7, 'TR', 'user1', '2024-04-01 14:01:58', 'Transaksi'),
+(8, 'LO', 'user1', '2024-04-01 14:02:43', 'Logout'),
+(9, 'LI', 'user1', '2024-04-01 14:02:54', 'Login'),
+(10, 'TR', 'user1', '2024-04-01 14:03:04', 'Transaksi'),
+(11, 'LO', 'user1', '2024-04-01 14:03:14', 'Logout'),
+(12, 'LI', 'user1', '2024-04-01 14:04:48', 'Login'),
+(13, 'TR', 'user1', '2024-04-01 14:04:55', 'Transaksi'),
+(14, 'LO', 'user1', '2024-04-01 14:05:15', 'Logout'),
+(15, 'LI', 'user1', '2024-04-01 14:05:37', 'Login'),
+(16, 'TR', 'user1', '2024-04-01 14:05:46', 'Transaksi'),
+(17, 'LI', 'user1', '2024-04-01 14:08:34', 'Login'),
+(18, 'TR', 'user1', '2024-04-01 14:08:44', 'Transaksi'),
+(19, 'LO', 'user1', '2024-04-01 14:08:55', 'Logout'),
+(20, 'LI', 'user1', '2024-04-01 14:11:51', 'Login'),
+(21, 'LO', 'user1', '2024-04-01 14:12:00', 'Logout'),
+(22, 'LI', 'user1', '2024-04-01 14:12:39', 'Login'),
+(23, 'TR', 'user1', '2024-04-01 14:12:52', 'Transaksi'),
+(24, 'LO', 'user1', '2024-04-01 14:13:12', 'Logout'),
+(25, 'LI', 'user1', '2024-04-01 14:14:04', 'Login'),
+(26, 'LO', 'user1', '2024-04-01 14:14:58', 'Logout'),
+(27, 'LI', 'user1', '2024-04-01 14:15:07', 'Login'),
+(28, 'LO', 'user1', '2024-04-01 14:15:38', 'Logout'),
+(29, 'LI', 'user1', '2024-04-01 14:15:48', 'Login'),
+(30, 'TR', 'user1', '2024-04-01 14:16:08', 'Transaksi'),
+(31, 'LO', 'user1', '2024-04-01 14:17:11', 'Logout');
 
 -- --------------------------------------------------------
 
@@ -90,13 +130,39 @@ INSERT INTO `detail_login_logout` (`log_id`, `prefix`, `username`, `tanggal`, `l
 --
 
 CREATE TABLE `detail_transaksi` (
-  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tanggal` varchar(255) NOT NULL,
   `id_transaksi` varchar(255) NOT NULL,
-  `kode` int(50) NOT NULL,
+  `kode` varchar(50) NOT NULL,
   `nama` varchar(150) NOT NULL,
-  `qty` int(100) NOT NULL,
-  `harga` double NOT NULL
+  `qty` varchar(100) NOT NULL,
+  `harga` varchar(255) NOT NULL,
+  `harga_total` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `detail_transaksi`
+--
+
+INSERT INTO `detail_transaksi` (`tanggal`, `id_transaksi`, `kode`, `nama`, `qty`, `harga`, `harga_total`) VALUES
+('2024-04-01 20:31:47', 'TR - 2', '1', 'Pocari Sweat 500 ml', '100', '9500.0', '950000.0'),
+('2024-04-01 20:31:47', 'TR - 2', '2', 'Indomie Goreng 85gr', '50', '3000.0', '150000.0'),
+('2024-04-01 20:33:51', 'TR - 4', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:01:58', 'TR - 7', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:01:58', 'TR - 7', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0'),
+('2024-04-01 21:01:58', 'TR - 7', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0'),
+('2024-04-01 21:03:04', 'TR - 10', '1', 'Pocari Sweat 500 ml', '11', '9500.0', '104500.0'),
+('2024-04-01 21:04:55', 'TR - 13', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:05:46', 'TR - 16', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:08:44', 'TR - 18', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:08:44', 'TR - 18', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0'),
+('2024-04-01 21:08:44', 'TR - 18', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0'),
+('2024-04-01 21:08:44', 'TR - 18', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0'),
+('2024-04-01 21:12:52', 'TR - 23', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:12:52', 'TR - 23', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:12:52', 'TR - 23', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:12:52', 'TR - 23', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:16:08', 'TR - 30', '1', 'Pocari Sweat 500 ml', '1', '9500.0', '9500.0'),
+('2024-04-01 21:16:08', 'TR - 30', '2', 'Indomie Goreng 85gr', '1', '3000.0', '3000.0');
 
 -- --------------------------------------------------------
 
@@ -182,7 +248,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `detail_login_logout`
 --
 ALTER TABLE `detail_login_logout`
-  MODIFY `log_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `log_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

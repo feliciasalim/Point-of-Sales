@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package AplikasiAdmin;
 
 import java.sql.Connection;
@@ -11,17 +7,21 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 /**
  *
  * @author USER
  */
+
 public class AdminFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AdminFrame
      */
     static Connection connection;
+
 
     public AdminFrame() {
         initComponents();
@@ -57,7 +57,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabeltrans = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -214,8 +214,8 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel9.setText("Tanggal");
 
-        jTable2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabeltrans.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        tabeltrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -224,7 +224,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 "No.", "Kode Transaksi"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabeltrans);
 
         jLabel10.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel10.setText("User");
@@ -248,7 +248,14 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel12.setText("Total");
 
-        jTextField10.setText("jTextField10");
+        jTextField10.setEditable(false);
+
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
+        jDateChooser1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jDateChooser1KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -458,7 +465,7 @@ public class AdminFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
-       
+        
 
     }//GEN-LAST:event_submititemActionPerformed
 
@@ -477,6 +484,11 @@ public class AdminFrame extends javax.swing.JFrame {
     private void jtxtkodebarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtkodebarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtkodebarangActionPerformed
+
+    private void jDateChooser1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser1KeyReleased
+        // TODO add your handling code here:
+        String query = "SELECT * FROM detail_login_logout WHERE date_column = ?";
+    }//GEN-LAST:event_jDateChooser1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -544,7 +556,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
@@ -557,5 +568,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtkodebarang;
     private javax.swing.JTextField jtxtnamabarang;
     private javax.swing.JButton submititem;
+    private javax.swing.JTable tabeltrans;
     // End of variables declaration//GEN-END:variables
 }
