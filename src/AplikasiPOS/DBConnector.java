@@ -18,7 +18,7 @@ public class DBConnector {
             connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
             
             if (connection!=null){
-                System.out.println("Connection is established");
+                System.out.println(".");
             }
         }
         catch (Exception ex){

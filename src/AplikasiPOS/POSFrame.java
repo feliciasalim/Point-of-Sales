@@ -1,6 +1,6 @@
 package AplikasiPOS;
 import static AplikasiPOS.Login.LoggedIn;
-import static AplikasiPOS.Login.getString;
+import AplikasiPOS.Session;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -533,7 +533,6 @@ public class POSFrame extends javax.swing.JFrame {
 
         Barang tempBarang;
 
-
         for (int i = 0; i < daftarBarang.size(); i++)
         {
             tempBarang = daftarBarang.get(i);
@@ -606,16 +605,17 @@ public class POSFrame extends javax.swing.JFrame {
     
     private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
         DBConnector.initDBConnection();
-        String Username = Login.storedUsername();
+        String Username = Session.get_Username();
         try {
-            String action = "Transaksi";
-            String total =  totalBelanjaTextField.getText();
-            String sql = "INSERT INTO transaksi (prefix, username, tanggal, total_pembayaran, activity) VALUES ('TR ID ','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"', '"+total+"','"+action+"')"; 
-            Connection conn = DBConnector.connection;
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate(sql); 
-            int rowCount = daftarModel.getRowCount();
-            int columnCount = daftarModel.getColumnCount();
+            if (Session.get_Username()!= null){
+                String action = "Transaksi";
+                String total =  totalBelanjaTextField.getText();
+                String sql = "INSERT INTO transaksi (prefix, username, tanggal, total_pembayaran, activity) VALUES ('TR ID ','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"', '"+total+"','"+action+"')"; 
+                Connection conn = DBConnector.connection;
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(sql); 
+                int rowCount = daftarModel.getRowCount();
+                int columnCount = daftarModel.getColumnCount();
                 try {
                     String get_id = "SELECT prefix, id_transaksi, tanggal FROM transaksi WHERE prefix = 'TR ID ' ORDER BY tanggal DESC LIMIT 1";
                     ResultSet rs2 = stmt.executeQuery(get_id);
@@ -644,14 +644,17 @@ public class POSFrame extends javax.swing.JFrame {
                             insertQuery.append(")");
 
                             stmt.executeUpdate(insertQuery.toString());
-                        }
+                            }
                     }
                 }
                 catch (Exception ex) {
                     System.out.println(ex);
-                } 
-            
-        } 
+                }      
+            }
+            else {
+                System.out.println("LOGIN REQUIRED");
+            }  
+    } 
         
         catch (Exception ex) {
             System.out.println(ex);
@@ -663,10 +666,15 @@ public class POSFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_clearBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        dispose();
-        Menu menu = new Menu();
-        menu.show();
-        menu.setLocationRelativeTo(null);
+        if (Session.get_Username()!= null) {
+            dispose();
+            Menu menu = new Menu();
+            menu.show();
+            menu.setLocationRelativeTo(null);
+        }
+        else {
+            System.out.println("LOGIN REQUIRED.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

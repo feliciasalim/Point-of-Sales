@@ -1,7 +1,8 @@
 package AplikasiPOS;
 
-
+import AplikasiPOS.Session;
 import java.sql.Connection;
+import AplikasiPOS.Session;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -309,29 +310,24 @@ public class Login extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         DBConnector.initDBConnection();
-        
-        String Username = username.getText();
-        String Password = password.getText();
-        String hashedPassword = passwordHash(Password);
-        String sql = "SELECT * FROM user WHERE username = '"+Username+"' AND password = '"+hashedPassword+"'";
-
+        String sql = "SELECT * FROM user WHERE username = '"+username.getText()+"' AND password = '"+passwordHash(password.getText())+"'";
         try {
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql); 
                 if (rs.next()) {
+                    Session.set_Username(rs.getString("username"));
+                    Session.set_id(rs.getString("id"));
                     dispose(); //if username && password = true, then close login page and go to POS Application
                     Menu menu = new Menu();
                     menu.show();
                     menu.setLocationRelativeTo(null);
-                    LoggedIn(Username);
-                    getString(Username);
+                    LoggedIn(Session.get_Username());
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or Password wrong");
                     username.setText("");
                     password.setText("");
-                    System.out.println(hashedPassword);
                 }
            } 
         catch (Exception ex) {
@@ -378,14 +374,14 @@ public class Login extends javax.swing.JFrame {
         return null;
     }
     
-    private static String USERNAME; 
-    public static void getString (String username){
-        USERNAME = username;
-    }
-    
-    public static String storedUsername(){
-        return USERNAME;
-    }
+//    private static String USERNAME; 
+//    public static void getString (String username){
+//        USERNAME = username;
+//    }
+//    
+//    public static String storedUsername(){
+//        return USERNAME;
+//    }
 
     
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed

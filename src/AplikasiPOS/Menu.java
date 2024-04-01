@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import AplikasiPOS.Session;
 
 /**
  *
@@ -507,7 +508,7 @@ public class Menu extends javax.swing.JFrame {
         if (Button ==  JOptionPane.YES_OPTION){
             dispose();
             POSProject.main();
-            String Username = Login.storedUsername();
+            String Username = Session.get_Username();
             DBConnector.initDBConnection();
         
             try {

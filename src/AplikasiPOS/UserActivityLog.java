@@ -33,37 +33,41 @@ public class UserActivityLog extends javax.swing.JFrame {
         daftarTable1.setDefaultRenderer(Integer.class, centerRenderer);
         
         tableModel.setRowCount(0); // Clear existing data
-        try {//show all activity log 
-            String sql = "SELECT * FROM detail_login_logout";
-            Connection conn = DBConnector.connection;
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql); 
-            while (rs.next()) {
-                String waktu = rs.getString("tanggal");
-                String id = String.valueOf(rs.getInt("log_id"));
-                String prefix = rs.getString("prefix");
-                String userID = prefix + " - " + id;
-                String username = rs.getString("username");
-                String activity = rs.getString("log_activity");
-                Object[] rowData = {waktu, userID, username, activity};
-                tableModel.addRow(rowData);
+        if (Session.get_Username()!=null){
+            try {//show all activity log 
+                String sql = "SELECT * FROM detail_login_logout";
+                Connection conn = DBConnector.connection;
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql); 
+                while (rs.next()) {
+                    String waktu = rs.getString("tanggal");
+                    String id = String.valueOf(rs.getInt("log_id"));
+                    String prefix = rs.getString("prefix");
+                    String userID = prefix + " - " + id;
+                    String username = rs.getString("username");
+                    String activity = rs.getString("log_activity");
+                    Object[] rowData = {waktu, userID, username, activity};
+                    tableModel.addRow(rowData);
+                }
+                String sql2 = "SELECT * FROM transaksi";
+                ResultSet rs2 = stmt.executeQuery(sql2); 
+                while (rs2.next()) {
+                    String waktuT = rs2.getString("tanggal");
+                    String idT = String.valueOf(rs2.getInt("id_transaksi"));
+                    String prefixT = rs2.getString("prefix");
+                    String userIDT = prefixT + idT;
+                    String usernameT = rs2.getString("username");
+                    String activityT = rs2.getString("activity");
+                    Object[] rowDataT = {waktuT, userIDT, usernameT, activityT};
+                    tableModel.addRow(rowDataT);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            String sql2 = "SELECT * FROM transaksi";
-            ResultSet rs2 = stmt.executeQuery(sql2); 
-            while (rs2.next()) {
-                String waktuT = rs2.getString("tanggal");
-                String idT = String.valueOf(rs2.getInt("id_transaksi"));
-                String prefixT = rs2.getString("prefix");
-                String userIDT = prefixT + idT;
-                String usernameT = rs2.getString("username");
-                String activityT = rs2.getString("activity");
-                Object[] rowDataT = {waktuT, userIDT, usernameT, activityT};
-                tableModel.addRow(rowDataT);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
         }
-        
+        else {
+            System.out.println("LOGIN REQUIRED.");
+        }
      
         daftarTable1.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
         daftarTable1.getTableHeader().setBackground(Color.decode("#FFE100"));
@@ -452,10 +456,15 @@ public class UserActivityLog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        dispose();
-        Menu menu = new Menu();
-        menu.show();
-        menu.setLocationRelativeTo(null);
+        if (Session.get_Username()!= null) {
+            dispose();
+            Menu menu = new Menu();
+            menu.show();
+            menu.setLocationRelativeTo(null);
+        }
+        else {
+            System.out.println("LOGIN REQUIRED.");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
@@ -463,28 +472,6 @@ public class UserActivityLog extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserActivityLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserActivityLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserActivityLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserActivityLog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
