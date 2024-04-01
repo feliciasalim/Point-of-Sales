@@ -1,5 +1,7 @@
 package AplikasiAdmin;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -8,7 +10,12 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 
 /**
  *
@@ -86,12 +93,13 @@ public class AdminFrame extends javax.swing.JFrame {
         tabeltrans = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        transUser = new javax.swing.JTextField();
+        transTime = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tabeldetail = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        transTotal = new javax.swing.JTextField();
+        Confirm = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -699,13 +707,34 @@ public class AdminFrame extends javax.swing.JFrame {
         tabeltrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
                 {null, null}
             },
             new String [] {
-                "No.", "Kode Transaksi"
+                "No", "Kode Transaksi"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabeltrans.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabeltransMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabeltrans);
+        if (tabeltrans.getColumnModel().getColumnCount() > 0) {
+            tabeltrans.getColumnModel().getColumn(0).setMinWidth(70);
+            tabeltrans.getColumnModel().getColumn(0).setPreferredWidth(15);
+            tabeltrans.getColumnModel().getColumn(0).setMaxWidth(70);
+        }
 
         jLabel10.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel10.setText("User");
@@ -713,28 +742,40 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel11.setText("Waktu");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        transUser.setEditable(false);
+
+        transTime.setEditable(false);
+
+        tabeldetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "No.", "Kode", "Nama", "Kuantitas"
+                "No.", "Kode", "Nama", "Kuantitas", "Harga"
             }
-        ));
-        jScrollPane3.setViewportView(jTable3);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tabeldetail);
 
         jLabel12.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel12.setText("Total");
 
-        jTextField10.setEditable(false);
+        transTotal.setEditable(false);
 
-        jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jDateChooser1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jDateChooser1KeyReleased(evt);
+        Confirm.setText("Confirm");
+        Confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmActionPerformed(evt);
             }
         });
 
@@ -748,23 +789,25 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(Confirm))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(293, 293, 293)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(transTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jScrollPane2)
@@ -777,21 +820,22 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
+                    .addComponent(Confirm)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(transTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72))
         );
 
@@ -911,11 +955,6 @@ public class AdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jDateChooser1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jDateChooser1KeyReleased
-        // TODO add your handling code here:
-        String query = "SELECT * FROM detail_login_logout WHERE date_column = ?";
-    }//GEN-LAST:event_jDateChooser1KeyReleased
-
     private void submititemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submititemActionPerformed
         // TODO add your handling code here:
         try {
@@ -948,14 +987,18 @@ public class AdminFrame extends javax.swing.JFrame {
             ps.setDouble(3, harga);
 
             ps.executeUpdate();
+
             JOptionPane.showMessageDialog(this, "Insert Successfully");
-        } catch (Exception ex) {
+            } catch (Exception ex) {
+
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+
     }//GEN-LAST:event_submititemActionPerformed
 
+     
     private void jtxthargabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxthargabarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxthargabarangActionPerformed
@@ -968,6 +1011,107 @@ public class AdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtkodebarangActionPerformed
 
+    private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
+        if (jDateChooser1.getDate() != null) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String selectedDate = sdf.format(jDateChooser1.getDate());
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM transaksi WHERE DATE(tanggal) = '" + selectedDate + "'";
+            ResultSet rs = st.executeQuery(sql);
+
+            DefaultTableModel tblModel = (DefaultTableModel) tabeltrans.getModel();
+            tblModel.setRowCount(0);
+
+            int index = 1;
+
+            while (rs.next()) {
+                String kodeTransaksi = "TR ID " + String.valueOf(rs.getInt("id_transaksi"));
+                Object[] rowData = {index, kodeTransaksi};
+                tblModel.addRow(rowData);
+
+                index++;
+            }
+            st.close();
+            con.close();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        System.out.println("No date is chosen.");
+    }
+
+    }//GEN-LAST:event_ConfirmActionPerformed
+
+    private void tabeltransMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeltransMouseClicked
+        // TODO add your handling code here:
+        int index = tabeltrans.getSelectedRow();
+         if (index != -1) {
+        DefaultTableModel model = (DefaultTableModel) tabeltrans.getModel();
+        String idTransaksi = model.getValueAt(index, 1).toString();
+        
+        
+        fetchAndPopulateTransactionDetails(idTransaksi);
+    }
+
+    }//GEN-LAST:event_tabeltransMouseClicked
+private void fetchAndPopulateTransactionDetails(String idTransaksi) {
+    try {
+        DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
+        tblModel.setRowCount(0);
+        
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
+        Statement st = con.createStatement();
+        String sql = "SELECT * FROM detail_transaksi WHERE id_transaksi = '"+idTransaksi+"'";
+        ResultSet rs = st.executeQuery(sql);
+        tblModel.setRowCount(0);
+
+        int index = 1;
+        while (rs.next()) {
+            String kode = rs.getString("kode");
+            String nama = rs.getString("nama");
+            String kuantitas = rs.getString("qty");
+            String harga = rs.getString("harga");
+            
+            
+            Object[] rowData = {index, kode, nama, kuantitas, harga};
+            tblModel.addRow(rowData);
+            String hargaTotal = rs.getString("harga_total");
+            transTotal.setText(String.valueOf(hargaTotal));
+            
+            index++;
+        }
+        
+        int num = Integer.parseInt(idTransaksi.replaceAll("\\D", ""));
+        String sqluser = "SELECT * FROM transaksi WHERE id_transaksi = '"+num+"'";
+        ResultSet rsu = st.executeQuery(sqluser);
+       
+        while (rsu.next()){
+        String user = rsu.getString("username");
+        transUser.setText(user);
+        }
+        
+        String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM detail_transaksi WHERE id_transaksi = '" + idTransaksi + "'";
+        ResultSet rsw = st.executeQuery(sqlwaktu);
+        while (rsw.next()) {
+        String time = rsw.getString("waktu");
+        transTime.setText(time);
+    }
+
+        
+        rsu.close();
+        rs.close();
+        st.close();
+        con.close();
+    } catch (ClassNotFoundException | SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
     /**
      * @param args the command line arguments
      */
@@ -1004,6 +1148,7 @@ public class AdminFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Confirm;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -1029,7 +1174,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
@@ -1053,7 +1197,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1062,18 +1205,18 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField jtxthargabarang;
     private javax.swing.JTextField jtxtkodebarang;
     private javax.swing.JTextField jtxtnamabarang;
     private javax.swing.JButton submititem;
+    private javax.swing.JTable tabeldetail;
     private javax.swing.JTable tabeltrans;
+    private javax.swing.JTextField transTime;
+    private javax.swing.JTextField transTotal;
+    private javax.swing.JTextField transUser;
     // End of variables declaration//GEN-END:variables
 }
