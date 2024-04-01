@@ -459,16 +459,15 @@ public class AdminFrame extends javax.swing.JFrame {
             ps.setDouble(3, harga);
             
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Insert Successfully");
+            JOptionPane.showMessageDialog(this, "Insert Successful");
             } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
 
     }//GEN-LAST:event_submititemActionPerformed
 
+    
     private void jtxthargabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxthargabarangActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxthargabarangActionPerformed
