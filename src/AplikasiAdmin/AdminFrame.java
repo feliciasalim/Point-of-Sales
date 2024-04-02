@@ -33,6 +33,20 @@ public class AdminFrame extends javax.swing.JFrame {
     public AdminFrame() {
         setUndecorated(true);
         initComponents();
+        DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tabelActivity.setDefaultRenderer(String.class, centerRenderer);
+        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer);
+        tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        tabelActivity.getTableHeader().setBackground(Color.decode("#FFE100"));
+        DefaultTableModel tabelModel = (DefaultTableModel) tabeltrans.getModel();
+       
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        tabeltrans.setDefaultRenderer(String.class, centerRenderer);
+        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer);
+        tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        tabeltrans.getTableHeader().setBackground(Color.decode("#FFE100"));
     }
 
     /**
@@ -112,9 +126,9 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        actUser = new javax.swing.JTextField();
+        actTime = new javax.swing.JTextField();
+        actDesk = new javax.swing.JTextField();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         Confirm2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -1073,11 +1087,12 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1201,7 +1216,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "No.", "Username Admin", "Tanggal", "Activity"
+                "No.", "Log ID", "Username Admin", "Activity"
             }
         ));
         tabelActivity.setSelectionBackground(new java.awt.Color(255, 225, 0));
@@ -1226,16 +1241,16 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel8.setText("Deskripsi");
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        actUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        actUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                actUserActionPerformed(evt);
             }
         });
 
-        jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        actTime.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        actDesk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
@@ -1319,15 +1334,15 @@ public class AdminFrame extends javax.swing.JFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(actDesk, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel7))
                                         .addGap(35, 35, 35)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(actUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(actTime, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1366,16 +1381,16 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(actUser, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                            .addComponent(actTime, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(actDesk, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -1412,9 +1427,9 @@ public class AdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void actUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actUserActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_actUserActionPerformed
 
     private void submititemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submititemActionPerformed
         DBConnector.initDBConnection();
@@ -1488,12 +1503,7 @@ public class AdminFrame extends javax.swing.JFrame {
                     ResultSet rs = st.executeQuery(sql);
 
                     DefaultTableModel tblModel = (DefaultTableModel) tabeltrans.getModel();
-                    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
-                    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-                    tabeltrans.setDefaultRenderer(String.class, centerRenderer);
-                    tabeltrans.setDefaultRenderer(Integer.class, centerRenderer);
-                    tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
-                    tabeltrans.getTableHeader().setBackground(Color.decode("#FFE100"));
+                    
                     
                     tblModel.setRowCount(0);
 
@@ -1538,29 +1548,25 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private void Confirm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Confirm2ActionPerformed
         if(Session.get_Username()!=null) { 
-            if (jDateChooser1.getDate() != null) {
+            if (jDateChooser2.getDate() != null) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String selectedDate = sdf.format(jDateChooser1.getDate());
+                String selectedDate = sdf.format(jDateChooser2.getDate());
                 try {
                     Connection con = DBConnector.connection;
                     Statement st = con.createStatement();
-                    String sql = "SELECT * FROM transaksi WHERE DATE(tanggal) = '" + selectedDate + "'";
+                    String sql = "SELECT * FROM activity_admin WHERE DATE(tanggal) = '" + selectedDate + "'";
                     ResultSet rs = st.executeQuery(sql);
 
                     DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
-                    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
-                    centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-                    tabelActivity.setDefaultRenderer(String.class, centerRenderer);
-                    tabelActivity.setDefaultRenderer(Integer.class, centerRenderer);
-                    tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
-                    tabelActivity.getTableHeader().setBackground(Color.decode("#FFE100"));
                     tblModel.setRowCount(0);
 
                     int index = 1;
 
                     while (rs.next()) {
-                        String kodeTransaksi = "TR ID " + String.valueOf(rs.getInt("id_transaksi"));
-                        Object[] rowData = {index, kodeTransaksi};
+                        String adminUsername = (rs.getString("admin_username"));
+                        String activity = (rs.getString("prefix"))+ String.valueOf(rs.getInt("activity_admin"));
+                        String action = (rs.getString("Activity"));
+                        Object[] rowData = {index, activity, adminUsername, action};
                         tblModel.addRow(rowData);
 
                         index++;
@@ -1742,6 +1748,60 @@ public class AdminFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void fetchAndPopulateActivity(String activity) {
+        try {
+            DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
+            tblModel.setRowCount(0);
+
+            Connection con = DBConnector.connection;
+            Statement st = con.createStatement();
+            
+            String sql = "SELECT * FROM activity_admin WHERE CONCAT (prefix, id) ='"+activity+"'";
+            ResultSet rs = st.executeQuery(sql);
+            tblModel.setRowCount(0);
+
+            int index = 1;
+            while (rs.next()) {
+                String kode = rs.getString("kode");
+                String nama = rs.getString("nama");
+                String kuantitas = rs.getString("qty");
+                String harga = rs.getString("harga");
+
+
+                Object[] rowData = {index, kode, nama, kuantitas, harga};
+                tblModel.addRow(rowData);
+                String hargaTotal = rs.getString("harga_total");
+                transTotal.setText(String.valueOf(hargaTotal));
+
+                index++;
+            }
+
+            
+            String sqluser = "SELECT * FROM activity_admin WHERE CONCAT (prefix, id) ='"+activity+"'";
+            ResultSet rsu = st.executeQuery(sqluser);
+
+            while (rsu.next()){
+                String user = rsu.getString("username");
+                actUser.setText(user);
+            }
+
+            String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM activity_admin WHERE id_transaksi = '" + activity + "'";
+            ResultSet rsw = st.executeQuery(sqlwaktu);
+            while (rsw.next()) {
+                String time = rsw.getString("waktu");
+                actTime.setText(time);
+        }
+            rsu.close();
+            rs.close();
+            st.close();
+            con.close();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -1782,6 +1842,9 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JButton Confirm2;
     private javax.swing.JButton LOGOUT;
     private javax.swing.JButton LOGOUT2;
+    private javax.swing.JTextField actDesk;
+    private javax.swing.JTextField actTime;
+    private javax.swing.JTextField actUser;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
@@ -1842,9 +1905,6 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jtxthargabarang;
     private javax.swing.JTextField jtxtkodebarang;
     private javax.swing.JTextField jtxtnamabarang;
