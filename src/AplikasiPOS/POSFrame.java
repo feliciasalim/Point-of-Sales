@@ -131,8 +131,8 @@ public class POSFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         kembalianTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        clearBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        okBtn = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -405,23 +405,23 @@ public class POSFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel6.setText("Kembalian");
 
-        clearBtn.setBackground(new java.awt.Color(255, 225, 0));
-        clearBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        clearBtn.setText("OK");
-        clearBtn.setFocusPainted(false);
-        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+        okBtn.setBackground(new java.awt.Color(255, 225, 0));
+        okBtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        okBtn.setText("OK");
+        okBtn.setFocusPainted(false);
+        okBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearBtnActionPerformed(evt);
+                okBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 225, 0));
-        jButton2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        jButton2.setText("KEMBALI");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnKembali.setBackground(new java.awt.Color(255, 225, 0));
+        btnKembali.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        btnKembali.setText("KEMBALI");
+        btnKembali.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnKembaliActionPerformed(evt);
             }
         });
 
@@ -455,7 +455,7 @@ public class POSFrame extends javax.swing.JFrame {
                         .addGap(19, 19, 19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -470,7 +470,7 @@ public class POSFrame extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dibayarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(okBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -507,8 +507,8 @@ public class POSFrame extends javax.swing.JFrame {
                         .addComponent(kembalianTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
+                            .addComponent(btnKembali, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(okBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))
                         .addGap(24, 24, 24))))
         );
 
@@ -603,7 +603,7 @@ public class POSFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_dibayarTextFieldKeyReleased
 
     
-    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+    private void okBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBtnActionPerformed
         DBConnector.initDBConnection();
         String Username = Session.get_Username();
         try {
@@ -663,9 +663,9 @@ public class POSFrame extends javax.swing.JFrame {
         POSFrame frame = new POSFrame();
         frame.show();
         frame.setLocationRelativeTo(null);
-    }//GEN-LAST:event_clearBtnActionPerformed
+    }//GEN-LAST:event_okBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         if (Session.get_Username()!= null) {
             dispose();
             Menu menu = new Menu();
@@ -675,7 +675,7 @@ public class POSFrame extends javax.swing.JFrame {
         else {
             System.out.println("LOGIN REQUIRED.");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -719,11 +719,10 @@ public class POSFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField HargaTextField;
     private javax.swing.JTextField NamaTextField;
-    private javax.swing.JButton clearBtn;
+    private javax.swing.JButton btnKembali;
     private javax.swing.JTable daftarTable;
     private javax.swing.JTextField dibayarTextField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
@@ -754,6 +753,7 @@ public class POSFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField kembalianTextField;
     private javax.swing.JTextField kodeTextField;
+    private javax.swing.JButton okBtn;
     private javax.swing.JTextField totalBelanjaTextField;
     // End of variables declaration//GEN-END:variables
 

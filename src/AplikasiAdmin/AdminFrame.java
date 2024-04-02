@@ -124,7 +124,7 @@ public class AdminFrame extends javax.swing.JFrame {
         tabeldetail = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         transTotal = new javax.swing.JTextField();
-        Confirm = new javax.swing.JButton();
+        ConfirmTransaksi = new javax.swing.JButton();
         LOGOUT2 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
@@ -139,11 +139,11 @@ public class AdminFrame extends javax.swing.JFrame {
         actTime = new javax.swing.JTextField();
         actDesk = new javax.swing.JTextField();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        Confirm2 = new javax.swing.JButton();
+        ConfirmActivity = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        logOutbtn = new javax.swing.JButton();
 
         jTextField1.setText("Tanggal");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -1041,13 +1041,13 @@ public class AdminFrame extends javax.swing.JFrame {
         transTotal.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         transTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        Confirm.setBackground(new java.awt.Color(255, 225, 0));
-        Confirm.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        Confirm.setText("Confirm");
-        Confirm.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        Confirm.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmTransaksi.setBackground(new java.awt.Color(255, 225, 0));
+        ConfirmTransaksi.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        ConfirmTransaksi.setText("Confirm");
+        ConfirmTransaksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ConfirmTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConfirmActionPerformed(evt);
+                ConfirmTransaksiActionPerformed(evt);
             }
         });
 
@@ -1079,7 +1079,7 @@ public class AdminFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Confirm)
+                                .addComponent(ConfirmTransaksi)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap(18, Short.MAX_VALUE)
@@ -1109,7 +1109,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Confirm, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(ConfirmTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -1303,12 +1303,12 @@ public class AdminFrame extends javax.swing.JFrame {
         jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
         jDateChooser2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
-        Confirm2.setBackground(new java.awt.Color(255, 225, 0));
-        Confirm2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        Confirm2.setText("Confirm");
-        Confirm2.addActionListener(new java.awt.event.ActionListener() {
+        ConfirmActivity.setBackground(new java.awt.Color(255, 225, 0));
+        ConfirmActivity.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        ConfirmActivity.setText("Confirm");
+        ConfirmActivity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Confirm2ActionPerformed(evt);
+                ConfirmActivityActionPerformed(evt);
             }
         });
 
@@ -1353,12 +1353,12 @@ public class AdminFrame extends javax.swing.JFrame {
             .addGap(0, 96, Short.MAX_VALUE)
         );
 
-        jButton1.setBackground(new java.awt.Color(255, 225, 0));
-        jButton1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        jButton1.setText("LOGOUT");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        logOutbtn.setBackground(new java.awt.Color(255, 225, 0));
+        logOutbtn.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+        logOutbtn.setText("LOGOUT");
+        logOutbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                logOutbtnActionPerformed(evt);
             }
         });
 
@@ -1374,7 +1374,7 @@ public class AdminFrame extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -1400,7 +1400,7 @@ public class AdminFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Confirm2)))
+                                .addComponent(ConfirmActivity)))
                         .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1412,7 +1412,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Confirm2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(ConfirmActivity, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1441,7 +1441,7 @@ public class AdminFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(48, 48, 48))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(logOutbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(19, 19, 19))))))
         );
 
@@ -1556,7 +1556,7 @@ public class AdminFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtkodebarangActionPerformed
 
-    private void ConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActionPerformed
+    private void ConfirmTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmTransaksiActionPerformed
         DBConnector.initDBConnection();
         if (Session.get_Username()!=null) { 
             if (jDateChooser1.getDate() != null) {
@@ -1595,7 +1595,7 @@ public class AdminFrame extends javax.swing.JFrame {
             System.out.println("LOGIN REQUIRED");
         }
         
-    }//GEN-LAST:event_ConfirmActionPerformed
+    }//GEN-LAST:event_ConfirmTransaksiActionPerformed
 
     private void tabeltransMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabeltransMouseClicked
         int index = tabeltrans.getSelectedRow();
@@ -1612,7 +1612,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tabeltransMouseClicked
 
-    private void Confirm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Confirm2ActionPerformed
+    private void ConfirmActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmActivityActionPerformed
         DBConnector.initDBConnection();
         if(Session.get_Username()!=null) { 
             if (jDateChooser2.getDate() != null) {
@@ -1660,7 +1660,7 @@ public class AdminFrame extends javax.swing.JFrame {
             System.out.println("LOGIN REQUIRED");
         }
         
-    }//GEN-LAST:event_Confirm2ActionPerformed
+    }//GEN-LAST:event_ConfirmActivityActionPerformed
 
     private void tabelActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelActivityMouseClicked
         // TODO add your handling code here:
@@ -1740,7 +1740,7 @@ public class AdminFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LOGOUT2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void logOutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutbtnActionPerformed
         int Button = JOptionPane.YES_NO_OPTION;
         Button = JOptionPane.showConfirmDialog (null, "Are you sure?","WARNING", Button);
         if (Button ==  JOptionPane.YES_OPTION){
@@ -1770,7 +1770,7 @@ public class AdminFrame extends javax.swing.JFrame {
         else {
             remove(Button);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_logOutbtnActionPerformed
     
     private void fetchAndPopulateTransactionDetails(String idTransaksi) {
         try {
@@ -1922,14 +1922,13 @@ public class AdminFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Confirm;
-    private javax.swing.JButton Confirm2;
+    private javax.swing.JButton ConfirmActivity;
+    private javax.swing.JButton ConfirmTransaksi;
     private javax.swing.JButton LOGOUT;
     private javax.swing.JButton LOGOUT2;
     private javax.swing.JTextField actDesk;
     private javax.swing.JTextField actTime;
     private javax.swing.JTextField actUser;
-    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -1992,6 +1991,7 @@ public class AdminFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jtxthargabarang;
     private javax.swing.JTextField jtxtkodebarang;
     private javax.swing.JTextField jtxtnamabarang;
+    private javax.swing.JButton logOutbtn;
     private javax.swing.JButton submititem;
     private javax.swing.JTable tabelActivity;
     private javax.swing.JTable tabeldetail;

@@ -225,7 +225,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Component id="jButton2" min="-2" pref="105" max="-2" attributes="0"/>
+                          <Component id="btnKembali" min="-2" pref="105" max="-2" attributes="0"/>
                           <EmptySpace min="254" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -244,7 +244,7 @@
                                       <Component id="kembalianTextField" min="-2" pref="157" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="clearBtn" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
+                              <Component id="okBtn" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                       </Group>
@@ -291,8 +291,8 @@
                           <Component id="kembalianTextField" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton2" max="32767" attributes="0"/>
-                              <Component id="clearBtn" pref="39" max="32767" attributes="0"/>
+                              <Component id="btnKembali" max="32767" attributes="0"/>
+                              <Component id="okBtn" pref="39" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
@@ -511,7 +511,7 @@
             <Property name="text" type="java.lang.String" value="Kembalian"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="clearBtn">
+        <Component class="javax.swing.JButton" name="okBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="e1" red="ff" type="rgb"/>
@@ -523,10 +523,10 @@
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="okBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btnKembali">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="e1" red="ff" type="rgb"/>
@@ -540,7 +540,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnKembaliActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

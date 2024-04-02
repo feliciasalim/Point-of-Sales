@@ -23,9 +23,9 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         setUndecorated(true);
         initComponents();
-        jButton1.setBackground(Color.white);
-        jButton2.setBackground(Color.white);
-        jButton3.setBackground(Color.white);
+        POSbtn.setBackground(Color.white);
+        actLogBtn.setBackground(Color.white);
+        LogOutBtn.setBackground(Color.white);
 
     }
     
@@ -67,8 +67,8 @@ public class Menu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        POSbtn = new javax.swing.JButton();
+        actLogBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -76,7 +76,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        LogOutBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -263,21 +263,21 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 40)); // NOI18N
         jLabel1.setText("MENU");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/POS.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        POSbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/POS.png"))); // NOI18N
+        POSbtn.setBorder(null);
+        POSbtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        POSbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                POSbtnActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/hourglass.png"))); // NOI18N
-        jButton2.setBorder(null);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        actLogBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/hourglass.png"))); // NOI18N
+        actLogBtn.setBorder(null);
+        actLogBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actLogBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                actLogBtnActionPerformed(evt);
             }
         });
 
@@ -356,11 +356,11 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 14, Short.MAX_VALUE)
         );
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        LogOutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
+        LogOutBtn.setBorder(null);
+        LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                LogOutBtnActionPerformed(evt);
             }
         });
 
@@ -398,9 +398,9 @@ public class Menu extends javax.swing.JFrame {
                                 .addGap(69, 69, 69)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
+                                        .addComponent(POSbtn)
                                         .addGap(66, 66, 66)
-                                        .addComponent(jButton2))
+                                        .addComponent(actLogBtn))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
                                         .addComponent(jLabel2)
@@ -409,7 +409,7 @@ public class Menu extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(65, 65, 65)
-                                        .addComponent(jButton3)
+                                        .addComponent(LogOutBtn)
                                         .addGap(13, 54, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -444,14 +444,14 @@ public class Menu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton1))
+                                    .addComponent(actLogBtn)
+                                    .addComponent(POSbtn))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton3)
+                                .addComponent(LogOutBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -472,7 +472,7 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,25 +484,25 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jButton1.setBackground(Color.white);
+    private void POSbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_POSbtnActionPerformed
+        POSbtn.setBackground(Color.white);
         POSFrame POS = new POSFrame();
         dispose();
         POS.show();
         POS.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_POSbtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jButton2.setBackground(Color.white);
+    private void actLogBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actLogBtnActionPerformed
+        actLogBtn.setBackground(Color.white);
         dispose();
         UserActivityLog LOG = new UserActivityLog();
         LOG.show();
         LOG.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_actLogBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
         //LOGOUT BUTTON
-        jButton3.setBackground(Color.white);
+        LogOutBtn.setBackground(Color.white);
         int Button = JOptionPane.YES_NO_OPTION;
         Button = JOptionPane.showConfirmDialog (null, "Are you sure?","WARNING", Button);
         if (Button ==  JOptionPane.YES_OPTION){
@@ -532,7 +532,7 @@ public class Menu extends javax.swing.JFrame {
         else {
             remove(Button);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_LogOutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -570,9 +570,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton LogOutBtn;
+    private javax.swing.JButton POSbtn;
+    private javax.swing.JButton actLogBtn;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JFileChooser jFileChooser1;
@@ -590,11 +590,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

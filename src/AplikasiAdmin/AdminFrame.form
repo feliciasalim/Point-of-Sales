@@ -989,7 +989,7 @@
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="jDateChooser1" min="-2" pref="168" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="Confirm" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ConfirmTransaksi" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace pref="329" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1031,7 +1031,7 @@
                       <Component id="jSeparator4" min="-2" pref="10" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="Confirm" alignment="0" pref="26" max="32767" attributes="0"/>
+                          <Component id="ConfirmTransaksi" alignment="0" pref="26" max="32767" attributes="0"/>
                           <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
                           <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -1268,7 +1268,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="Confirm">
+            <Component class="javax.swing.JButton" name="ConfirmTransaksi">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="e1" red="ff" type="rgb"/>
@@ -1282,7 +1282,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmTransaksiActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="LOGOUT2">
@@ -1336,7 +1336,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" pref="119" max="-2" attributes="0"/>
+                                      <Component id="logOutbtn" min="-2" pref="119" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1369,7 +1369,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jDateChooser2" min="-2" pref="181" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="Confirm2" min="-2" max="-2" attributes="0"/>
+                                      <Component id="ConfirmActivity" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
@@ -1387,7 +1387,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jDateChooser2" max="32767" attributes="0"/>
-                          <Component id="Confirm2" pref="26" max="32767" attributes="0"/>
+                          <Component id="ConfirmActivity" pref="26" max="32767" attributes="0"/>
                           <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1422,7 +1422,7 @@
                                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton1" min="-2" pref="37" max="-2" attributes="0"/>
+                                      <Component id="logOutbtn" min="-2" pref="37" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1600,7 +1600,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="Confirm2">
+            <Component class="javax.swing.JButton" name="ConfirmActivity">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="e1" red="ff" type="rgb"/>
@@ -1611,7 +1611,7 @@
                 <Property name="text" type="java.lang.String" value="Confirm"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Confirm2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmActivityActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="jPanel4">
@@ -1680,7 +1680,7 @@
                 </DimensionLayout>
               </Layout>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="logOutbtn">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="e1" red="ff" type="rgb"/>
@@ -1691,7 +1691,7 @@
                 <Property name="text" type="java.lang.String" value="LOGOUT"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logOutbtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

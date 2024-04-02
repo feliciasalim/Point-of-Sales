@@ -25,12 +25,12 @@ public class UserActivityLog extends javax.swing.JFrame {
         initComponents();
         DBConnector.initDBConnection();
         
-        DefaultTableModel tableModel = (DefaultTableModel) daftarTable1.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel) daftarTableLog.getModel();
         //set table contents centered
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        daftarTable1.setDefaultRenderer(String.class, centerRenderer);
-        daftarTable1.setDefaultRenderer(Integer.class, centerRenderer);
+        daftarTableLog.setDefaultRenderer(String.class, centerRenderer);
+        daftarTableLog.setDefaultRenderer(Integer.class, centerRenderer);
         
         tableModel.setRowCount(0); // Clear existing data
         if (Session.get_Username()!=null){
@@ -69,8 +69,8 @@ public class UserActivityLog extends javax.swing.JFrame {
             System.out.println("LOGIN REQUIRED.");
         }
      
-        daftarTable1.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
-        daftarTable1.getTableHeader().setBackground(Color.decode("#FFE100"));
+        daftarTableLog.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        daftarTableLog.getTableHeader().setBackground(Color.decode("#FFE100"));
     }
 
     /**
@@ -85,7 +85,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        daftarTable1 = new javax.swing.JTable();
+        daftarTableLog = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -94,7 +94,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -116,10 +116,10 @@ public class UserActivityLog extends javax.swing.JFrame {
         jScrollPane2.setBackground(new java.awt.Color(230, 230, 230));
         jScrollPane2.setBorder(null);
 
-        daftarTable1.setAutoCreateRowSorter(true);
-        daftarTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        daftarTable1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        daftarTable1.setModel(new javax.swing.table.DefaultTableModel(
+        daftarTableLog.setAutoCreateRowSorter(true);
+        daftarTableLog.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        daftarTableLog.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        daftarTableLog.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -241,14 +241,14 @@ public class UserActivityLog extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        daftarTable1.setToolTipText("");
-        daftarTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        daftarTable1.setGridColor(new java.awt.Color(222, 222, 222));
-        daftarTable1.setSelectionBackground(new java.awt.Color(255, 225, 0));
-        daftarTable1.setShowGrid(true);
-        jScrollPane2.setViewportView(daftarTable1);
-        if (daftarTable1.getColumnModel().getColumnCount() > 0) {
-            daftarTable1.getColumnModel().getColumn(0).setPreferredWidth(200);
+        daftarTableLog.setToolTipText("");
+        daftarTableLog.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        daftarTableLog.setGridColor(new java.awt.Color(222, 222, 222));
+        daftarTableLog.setSelectionBackground(new java.awt.Color(255, 225, 0));
+        daftarTableLog.setShowGrid(true);
+        jScrollPane2.setViewportView(daftarTableLog);
+        if (daftarTableLog.getColumnModel().getColumnCount() > 0) {
+            daftarTableLog.getColumnModel().getColumn(0).setPreferredWidth(200);
         }
 
         jPanel2.setBackground(new java.awt.Color(255, 225, 0));
@@ -362,13 +362,13 @@ public class UserActivityLog extends javax.swing.JFrame {
             .addGap(0, 76, Short.MAX_VALUE)
         );
 
-        jButton3.setBackground(new java.awt.Color(255, 225, 0));
-        jButton3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        jButton3.setText("KEMBALI");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnKembali.setBackground(new java.awt.Color(255, 225, 0));
+        btnKembali.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        btnKembali.setText("KEMBALI");
+        btnKembali.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnKembaliActionPerformed(evt);
             }
         });
 
@@ -389,7 +389,7 @@ public class UserActivityLog extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -435,7 +435,7 @@ public class UserActivityLog extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnKembali, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -455,7 +455,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
         if (Session.get_Username()!= null) {
             dispose();
             Menu menu = new Menu();
@@ -465,7 +465,7 @@ public class UserActivityLog extends javax.swing.JFrame {
         else {
             System.out.println("LOGIN REQUIRED.");
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
     
     /**
@@ -482,8 +482,8 @@ public class UserActivityLog extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable daftarTable1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnKembali;
+    private javax.swing.JTable daftarTableLog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
