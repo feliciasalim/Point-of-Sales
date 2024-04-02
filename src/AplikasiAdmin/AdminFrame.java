@@ -34,19 +34,28 @@ public class AdminFrame extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer(); 
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        tabelActivity.setDefaultRenderer(String.class, centerRenderer);
-        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer);
+        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer(); 
+        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+        tabelActivity.setDefaultRenderer(String.class, centerRenderer1);
+        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer1);
         tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
         tabelActivity.getTableHeader().setBackground(Color.decode("#FFE100"));
         DefaultTableModel tabelModel = (DefaultTableModel) tabeltrans.getModel();
-       
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        tabeltrans.setDefaultRenderer(String.class, centerRenderer);
-        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer);
+        DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer(); 
+
+        centerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
+        tabeltrans.setDefaultRenderer(String.class, centerRenderer2);
+        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer2);
         tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
         tabeltrans.getTableHeader().setBackground(Color.decode("#FFE100"));
+        DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer(); 
+        centerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultTableModel tabelModel2 = (DefaultTableModel) tabeldetail.getModel();
+        tabeldetail.setDefaultRenderer(String.class, centerRenderer3);
+        tabeldetail.setDefaultRenderer(Integer.class, centerRenderer3);
+        tabeldetail.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        tabeldetail.getTableHeader().setBackground(Color.decode("#FFE100"));
+
     }
 
     /**
@@ -748,7 +757,7 @@ public class AdminFrame extends javax.swing.JFrame {
 
         jScrollPane2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
-        tabeltrans.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        tabeltrans.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tabeltrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -878,7 +887,7 @@ public class AdminFrame extends javax.swing.JFrame {
         }
 
         jLabel10.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        jLabel10.setText("User");
+        jLabel10.setText("Username");
 
         jLabel11.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel11.setText("Waktu");
@@ -891,7 +900,7 @@ public class AdminFrame extends javax.swing.JFrame {
         transTime.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         transTime.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tabeldetail.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        tabeldetail.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tabeldetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1009,6 +1018,15 @@ public class AdminFrame extends javax.swing.JFrame {
         });
         tabeldetail.setSelectionBackground(new java.awt.Color(255, 225, 0));
         jScrollPane3.setViewportView(tabeldetail);
+        if (tabeldetail.getColumnModel().getColumnCount() > 0) {
+            tabeldetail.getColumnModel().getColumn(0).setMinWidth(70);
+            tabeldetail.getColumnModel().getColumn(0).setPreferredWidth(10);
+            tabeldetail.getColumnModel().getColumn(0).setMaxWidth(70);
+            tabeldetail.getColumnModel().getColumn(1).setMinWidth(70);
+            tabeldetail.getColumnModel().getColumn(1).setPreferredWidth(10);
+            tabeldetail.getColumnModel().getColumn(1).setMaxWidth(70);
+            tabeldetail.getColumnModel().getColumn(2).setPreferredWidth(250);
+        }
 
         jLabel12.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel12.setText("Total Rp");
@@ -1056,8 +1074,8 @@ public class AdminFrame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
                                 .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel11)
@@ -1111,7 +1129,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal");
 
-        tabelActivity.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        tabelActivity.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         tabelActivity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1218,7 +1236,15 @@ public class AdminFrame extends javax.swing.JFrame {
             new String [] {
                 "No.", "Log ID", "Username Admin", "Activity"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelActivity.setSelectionBackground(new java.awt.Color(255, 225, 0));
         tabelActivity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1233,7 +1259,7 @@ public class AdminFrame extends javax.swing.JFrame {
         }
 
         jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
-        jLabel6.setText("User");
+        jLabel6.setText("Username");
 
         jLabel7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel7.setText("Waktu");
@@ -1241,6 +1267,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel8.setText("Deskripsi");
 
+        actUser.setEditable(false);
         actUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         actUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1248,8 +1275,10 @@ public class AdminFrame extends javax.swing.JFrame {
             }
         });
 
+        actTime.setEditable(false);
         actTime.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+        actDesk.setEditable(false);
         actDesk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1337,9 +1366,9 @@ public class AdminFrame extends javax.swing.JFrame {
                                         .addComponent(actDesk, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel7))
-                                        .addGap(35, 35, 35)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(actUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(actTime, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1433,14 +1462,17 @@ public class AdminFrame extends javax.swing.JFrame {
 
     private void submititemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submititemActionPerformed
         DBConnector.initDBConnection();
+        Connection con = DBConnector.connection;
+
         if (Session.get_Username()!=null){
             try {
-                Connection con = DBConnector.connection;
                 PreparedStatement ps = con.prepareStatement("INSERT INTO barang (kode, nama, harga) VALUES (?, ?, ?)");
 
                 try {
                     int kode = Integer.parseInt(jtxtkodebarang.getText());
                     ps.setInt(1, kode);
+
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(this, "Kode Barang must be an integer", "Input Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -1466,9 +1498,25 @@ public class AdminFrame extends javax.swing.JFrame {
                 ps.executeUpdate();
 
                 JOptionPane.showMessageDialog(this, "Insert Successfully");
+                
             } catch (Exception ex) {
                 ex.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            int Kode = Integer.parseInt(jtxtkodebarang.getText());
+            String query_item = "INSERT INTO item_entry_details (kode, prefix, admin_username, tanggal, Activity) VALUES (?, 'IE', ?, ?, 'Item Entry')";
+            try {
+                PreparedStatement stmt = con.prepareStatement(query_item);
+                stmt.setInt(1, Kode);
+                stmt.setString(2, Session.get_Username());
+                stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+                int rowsInserted = stmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("SUCCESS");
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
         } 
         else {
@@ -1556,23 +1604,32 @@ public class AdminFrame extends javax.swing.JFrame {
                     Statement st = con.createStatement();
                     String sql = "SELECT * FROM activity_admin WHERE DATE(tanggal) = '" + selectedDate + "'";
                     ResultSet rs = st.executeQuery(sql);
-
                     DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
                     tblModel.setRowCount(0);
-
                     int index = 1;
 
                     while (rs.next()) {
                         String adminUsername = (rs.getString("admin_username"));
-                        String activity = (rs.getString("prefix"))+ String.valueOf(rs.getInt("activity_admin"));
+                        String LOG_ID = (rs.getString("prefix")) + String.valueOf(rs.getInt("id"));
                         String action = (rs.getString("Activity"));
-                        Object[] rowData = {index, activity, adminUsername, action};
+                        Object[] rowData = {index, LOG_ID, adminUsername, action};
                         tblModel.addRow(rowData);
 
                         index++;
                     }
-                    st.close();
-                    con.close();
+                    
+                    String sql2 = "SELECT * FROM item_entry_details WHERE DATE(tanggal) = '" + selectedDate + "'";
+                    ResultSet rs2 = st.executeQuery(sql2);
+                    while (rs2.next()) {
+                        String adminUsernameIE = (rs2.getString("admin_username"));
+                        String LOG_ID_IE = (rs2.getString("prefix")) + " - "+ String.valueOf(rs2.getInt("id"));
+                        String actionIE = (rs2.getString("Activity"));
+                        Object[] rowData = {index, LOG_ID_IE, adminUsernameIE, actionIE};
+                        tblModel.addRow(rowData);
+
+                        index++;
+                    }
+                    
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -1591,9 +1648,10 @@ public class AdminFrame extends javax.swing.JFrame {
         int index = tabelActivity.getSelectedRow();
         if (Session.get_Username()!= null) {
             if (index != -1) {
-            DefaultTableModel model = (DefaultTableModel) tabelActivity.getModel();
-            String activity = model.getValueAt(index, 1).toString();
-            fetchAndPopulateTransactionDetails(activity);
+                DBConnector.initDBConnection();
+                DefaultTableModel model = (DefaultTableModel) tabelActivity.getModel();
+                String id = model.getValueAt(index, 1).toString();
+                fetchAndPopulateTransactionDetails(id);
             }
         }else {
             System.out.println("LOGIN REQUIRED");
@@ -1701,12 +1759,12 @@ public class AdminFrame extends javax.swing.JFrame {
             DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
             tblModel.setRowCount(0);
 
-            Connection con = DBConnector.connection;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
             Statement st = con.createStatement();
             String sql = "SELECT * FROM detail_transaksi WHERE id_transaksi = '"+idTransaksi+"'";
             ResultSet rs = st.executeQuery(sql);
             tblModel.setRowCount(0);
-
             int index = 1;
             while (rs.next()) {
                 String kode = rs.getString("kode");
@@ -1726,80 +1784,91 @@ public class AdminFrame extends javax.swing.JFrame {
             int num = Integer.parseInt(idTransaksi.replaceAll("\\D", ""));
             String sqluser = "SELECT * FROM transaksi WHERE id_transaksi = '"+num+"'";
             ResultSet rsu = st.executeQuery(sqluser);
-
             while (rsu.next()){
-                String user = rsu.getString("username");
-                transUser.setText(user);
+            String user = rsu.getString("username");
+            transUser.setText(user);
             }
 
             String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM detail_transaksi WHERE id_transaksi = '" + idTransaksi + "'";
             ResultSet rsw = st.executeQuery(sqlwaktu);
             while (rsw.next()) {
-                String time = rsw.getString("waktu");
-                transTime.setText(time);
+            String time = rsw.getString("waktu");
+            transTime.setText(time);
         }
+
             rsu.close();
             rs.close();
             st.close();
             con.close();
-            
-        } catch (SQLException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
+}
     
     private void fetchAndPopulateActivity(String activity) {
         try {
-            DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
-            tblModel.setRowCount(0);
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection con = DBConnector.connection;
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
             Statement st = con.createStatement();
-            
-            String sql = "SELECT * FROM activity_admin WHERE CONCAT (prefix, id) ='"+activity+"'";
+            String text = activity.replaceAll("\\d","");
+            int num = Integer.parseInt(activity.replaceAll("\\D",""));
+            String sql = "SELECT * FROM activity_admin WHERE prefix = '"+text+"'";
             ResultSet rs = st.executeQuery(sql);
-            tblModel.setRowCount(0);
-
-            int index = 1;
-            while (rs.next()) {
-                String kode = rs.getString("kode");
-                String nama = rs.getString("nama");
-                String kuantitas = rs.getString("qty");
-                String harga = rs.getString("harga");
-
-
-                Object[] rowData = {index, kode, nama, kuantitas, harga};
-                tblModel.addRow(rowData);
-                String hargaTotal = rs.getString("harga_total");
-                transTotal.setText(String.valueOf(hargaTotal));
-
-                index++;
-            }
-
             
-            String sqluser = "SELECT * FROM activity_admin WHERE CONCAT (prefix, id) ='"+activity+"'";
-            ResultSet rsu = st.executeQuery(sqluser);
-
-            while (rsu.next()){
-                String user = rsu.getString("username");
-                actUser.setText(user);
+            while (rs.next() && (rs.getString("prefix").equals("ALI")|| rs.getString("prefix").equals("ALO"))){
+                if (rs.getInt("id") == num) {
+                    String user = rs.getString("admin_username");
+                    String deskripsi = "";
+                    if (rs.getString("Activity").equals("Login")){
+                        deskripsi = "Melakukan aktivitas login.";
+                    } else if (rs.getString("Activity").equals("Logout")) {
+                        deskripsi = "Melakukan aktivitas logout.";
+                    }
+                    String SQLwaktu = "SELECT TIME(tanggal) AS waktu FROM activity_admin WHERE id = '"+num+"'";
+                    ResultSet rs3 = st.executeQuery(SQLwaktu);
+                    while (rs3.next()){
+                    String time = rs3.getString("waktu");
+                    actTime.setText(time);
+                    }
+                    actUser.setText(user);
+                    actDesk.setText(deskripsi);
+                }
             }
-
-            String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM activity_admin WHERE id_transaksi = '" + activity + "'";
-            ResultSet rsw = st.executeQuery(sqlwaktu);
-            while (rsw.next()) {
-                String time = rsw.getString("waktu");
-                actTime.setText(time);
-        }
-            rsu.close();
+            
+            String sql2 = "SELECT * FROM item_entry_details WHERE prefix = '"+text+"'";
+            ResultSet rs2 = st.executeQuery(sql2);
+            
+            while (rs2.next() && (rs2.getString("prefix").equals("IE"))) {
+                if (rs2.getInt("id") == num){
+                    String user = rs2.getString("admin_username");
+                    String KODE = String.valueOf(rs2.getInt("kode"));
+                    ResultSet rs4 = st.executeQuery("SELECT * FROM barang WHERE kode = '" +KODE+ "'");
+                    while (rs4.next()){
+                    String namaBrg = rs4.getString("nama");
+                    String deskripsi = "Menambahkan barang " + namaBrg + " pada sistem.";
+                    actDesk.setText(deskripsi);
+                    }
+                    String SQLwaktu = "SELECT TIME(tanggal) AS waktu FROM item_entry_details WHERE id = '"+num+"'";
+                    ResultSet rs3 = st.executeQuery(SQLwaktu);
+                    while (rs3.next()){
+                        String time = rs3.getString("waktu");
+                        actTime.setText(time);
+                    }
+                    actUser.setText(user);
+                }
+            }
             rs.close();
+            rs2.close();
             st.close();
             con.close();
             
         } catch (SQLException ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
     }
     /**
