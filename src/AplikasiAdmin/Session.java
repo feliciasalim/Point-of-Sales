@@ -1,16 +1,19 @@
-package AplikasiPOS;
+package AplikasiAdmin;
+
+import AplikasiPOS.*;
+import java.util.UUID;
 
 /**
  *
  * @author ASUS
  */
 public class Session {
-    private static String Username;
+    private static String admin_username;
     private static String id;
     
     
     public static String get_Username() {
-        return Username;
+        return admin_username;
     }
     
     public static String get_id() {
@@ -21,8 +24,8 @@ public class Session {
         Session.id = id;
     }
     
-    public static void set_Username (String Username){
-        Session.Username = Username;
+    public static void set_Username (String admin_username){
+        Session.admin_username = admin_username;
     }
    
 }

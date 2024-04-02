@@ -1,6 +1,6 @@
 package AplikasiAdmin;
 
-
+import AplikasiAdmin.Session;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -227,27 +227,25 @@ public class AdminLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         DBConnector.initDBConnection();
         
-        String  AdminUsername = username.getText();
-        String Password = password.getText();
-        String hashedPassword = passwordHash(Password);
-        String sql = "SELECT * FROM admin WHERE admin_username = '"+AdminUsername+"' AND password = '"+hashedPassword+"'";
+        String sql = "SELECT * FROM admin WHERE admin_username = '"+username.getText()+"' AND password = '"+passwordHash(password.getText())+"'";
 
         try {
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql); 
                 if (rs.next()) {
+                    Session.set_Username(rs.getString("admin_username"));
+                    Session.set_id(rs.getString("adm_id"));
                     dispose(); //if username && password = true, then close login page and go to POS Application
                     AdminFrame Admin = new AdminFrame();
                     Admin.show();
-                    LoggedIn(AdminUsername);
-                    getString(AdminUsername);
+                    Admin.setLocationRelativeTo(null);
+                    LoggedIn(Session.get_Username());
 
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or Password wrong");
                     username.setText("");
                     password.setText("");
-                    System.out.println(hashedPassword);
                 }
 
         } 
@@ -283,7 +281,7 @@ public class AdminLogin extends javax.swing.JFrame {
         
         try {
             String action = "Login";
-            String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('TI','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+            String query = "INSERT INTO activity_admin (prefix, admin_username, tanggal, Activity) VALUES ('ALI','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
 
             Connection conn = DBConnector.connection;
             Statement stmt = conn.createStatement();
@@ -295,9 +293,6 @@ public class AdminLogin extends javax.swing.JFrame {
         return null;
     }
     
-    public static String getString (String username){
-        return username;
-    }
 
     
     private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed

@@ -323,7 +323,7 @@ public class Login extends javax.swing.JFrame {
                     menu.show();
                     menu.setLocationRelativeTo(null);
                     LoggedIn(Session.get_Username());
-
+                    conn.close();
                 } else {
                     JOptionPane.showMessageDialog(this, "Username or Password wrong");
                     username.setText("");

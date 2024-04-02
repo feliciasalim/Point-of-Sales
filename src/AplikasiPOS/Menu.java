@@ -510,18 +510,24 @@ public class Menu extends javax.swing.JFrame {
             POSProject.main();
             String Username = Session.get_Username();
             DBConnector.initDBConnection();
-        
-            try {
-                String action = "Logout";
-                String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LO','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
+            if (Session.get_Username()!=null){
+                try {
+                    String action = "Logout";
+                    String query = "INSERT INTO detail_login_logout (prefix, username, tanggal, log_activity) VALUES ('LO','"+Username+"','"+new Timestamp(System.currentTimeMillis())+"','"+action+"')";
 
-                Connection conn = DBConnector.connection;
-                Statement stmt = conn.createStatement();
-                stmt.executeUpdate(query);
+                    Connection conn = DBConnector.connection;
+                    Statement stmt = conn.createStatement();
+                    stmt.executeUpdate(query);
+                    Session.set_Username(null);
+                }
+                catch(Exception ex){
+                    System.out.println("Error");
+                }
             }
-            catch(Exception ex){
-                System.out.println("Error");
+            else {
+                System.out.println("SESSION EXPIRED. LOGIN FIRST.");
             }
+                
         }
         else {
             remove(Button);
