@@ -118,7 +118,7 @@ public class UserActivityLog extends javax.swing.JFrame {
 
         daftarTable1.setAutoCreateRowSorter(true);
         daftarTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        daftarTable1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        daftarTable1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         daftarTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

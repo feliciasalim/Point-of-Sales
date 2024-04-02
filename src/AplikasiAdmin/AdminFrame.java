@@ -15,11 +15,13 @@ import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
+
 
 
 public class AdminFrame extends javax.swing.JFrame {
@@ -33,30 +35,40 @@ public class AdminFrame extends javax.swing.JFrame {
     public AdminFrame() {
         setUndecorated(true);
         initComponents();
-        DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
-        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer(); 
-        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
-        tabelActivity.setDefaultRenderer(String.class, centerRenderer1);
-        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer1);
-        tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        
+//        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer(); 
+//        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
+//        tabelActivity.setDefaultRenderer(String.class, centerRenderer1);
+//        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer1);
+        tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabelActivity.getTableHeader().setBackground(Color.decode("#FFE100"));
-        DefaultTableModel tabelModel = (DefaultTableModel) tabeltrans.getModel();
-        DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer(); 
-
-        centerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
-        tabeltrans.setDefaultRenderer(String.class, centerRenderer2);
-        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer2);
-        tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        
+//        DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer(); 
+//        centerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
+//        tabeltrans.setDefaultRenderer(String.class, centerRenderer2);
+//        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer2);
+        tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabeltrans.getTableHeader().setBackground(Color.decode("#FFE100"));
-        DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer(); 
-        centerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
-        DefaultTableModel tabelModel2 = (DefaultTableModel) tabeldetail.getModel();
-        tabeldetail.setDefaultRenderer(String.class, centerRenderer3);
-        tabeldetail.setDefaultRenderer(Integer.class, centerRenderer3);
-        tabeldetail.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 12));
+        
+//        DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer(); 
+//        centerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
+//        tabeldetail.setDefaultRenderer(String.class, centerRenderer3);
+//        tabeldetail.setDefaultRenderer(Integer.class, centerRenderer3);
+//        tabeldetail.setDefaultRenderer(Float.class, centerRenderer3);
+        tabeldetail.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabeldetail.getTableHeader().setBackground(Color.decode("#FFE100"));
-
+        
+        tabelActivity.setDefaultRenderer(Object.class, new CenterRenderer());
+        tabeltrans.setDefaultRenderer(Object.class, new CenterRenderer());
+        tabeldetail.setDefaultRenderer(Object.class, new CenterRenderer());
     }
+
+    class CenterRenderer extends DefaultTableCellRenderer {
+        public CenterRenderer() {
+            setHorizontalAlignment(JLabel.CENTER);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -757,7 +769,8 @@ public class AdminFrame extends javax.swing.JFrame {
 
         jScrollPane2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
-        tabeltrans.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabeltrans.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabeltrans.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         tabeltrans.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -873,7 +886,9 @@ public class AdminFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabeltrans.setGridColor(new java.awt.Color(222, 222, 222));
         tabeltrans.setSelectionBackground(new java.awt.Color(255, 225, 0));
+        tabeltrans.setShowGrid(true);
         tabeltrans.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabeltransMouseClicked(evt);
@@ -900,7 +915,8 @@ public class AdminFrame extends javax.swing.JFrame {
         transTime.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         transTime.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        tabeldetail.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabeldetail.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabeldetail.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         tabeldetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -1016,7 +1032,9 @@ public class AdminFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabeldetail.setGridColor(new java.awt.Color(222, 222, 222));
         tabeldetail.setSelectionBackground(new java.awt.Color(255, 225, 0));
+        tabeldetail.setShowGrid(true);
         jScrollPane3.setViewportView(tabeldetail);
         if (tabeldetail.getColumnModel().getColumnCount() > 0) {
             tabeldetail.getColumnModel().getColumn(0).setMinWidth(70);
@@ -1063,34 +1081,38 @@ public class AdminFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator4)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
                         .addGap(18, 18, 18)
-                        .addComponent(transTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(LOGOUT2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane3)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
-                                .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))))
+                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Confirm)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 329, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(transTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(LOGOUT2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(transUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(transTime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(18, 18, 18))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Confirm)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1129,7 +1151,8 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal");
 
-        tabelActivity.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        tabelActivity.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        tabelActivity.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         tabelActivity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -1245,7 +1268,9 @@ public class AdminFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelActivity.setGridColor(new java.awt.Color(222, 222, 222));
         tabelActivity.setSelectionBackground(new java.awt.Color(255, 225, 0));
+        tabelActivity.setShowGrid(true);
         tabelActivity.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelActivityMouseClicked(evt);
@@ -1268,6 +1293,8 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel8.setText("Deskripsi");
 
         actUser.setEditable(false);
+        actUser.setBackground(new java.awt.Color(250, 250, 250));
+        actUser.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         actUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         actUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1276,9 +1303,13 @@ public class AdminFrame extends javax.swing.JFrame {
         });
 
         actTime.setEditable(false);
+        actTime.setBackground(new java.awt.Color(250, 250, 250));
+        actTime.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         actTime.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         actDesk.setEditable(false);
+        actDesk.setBackground(new java.awt.Color(250, 250, 250));
+        actDesk.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         actDesk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
@@ -1360,18 +1391,14 @@ public class AdminFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(actDesk, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(actUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(actTime, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(actDesk, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(actUser, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(actTime, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1381,9 +1408,9 @@ public class AdminFrame extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Confirm2)))
                         .addGap(0, 12, Short.MAX_VALUE)))
@@ -1403,7 +1430,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1648,10 +1675,9 @@ public class AdminFrame extends javax.swing.JFrame {
         int index = tabelActivity.getSelectedRow();
         if (Session.get_Username()!= null) {
             if (index != -1) {
-                DBConnector.initDBConnection();
                 DefaultTableModel model = (DefaultTableModel) tabelActivity.getModel();
                 String id = model.getValueAt(index, 1).toString();
-                fetchAndPopulateTransactionDetails(id);
+                fetchAndPopulateActivity(id);
             }
         }else {
             System.out.println("LOGIN REQUIRED");
@@ -1812,13 +1838,11 @@ public class AdminFrame extends javax.swing.JFrame {
 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
             Statement st = con.createStatement();
-            String text = activity.replaceAll("\\d","");
             int num = Integer.parseInt(activity.replaceAll("\\D",""));
-            String sql = "SELECT * FROM activity_admin WHERE prefix = '"+text+"'";
+            String sql = "SELECT * FROM activity_admin WHERE id = '"+num+"'";
             ResultSet rs = st.executeQuery(sql);
             
-            while (rs.next() && (rs.getString("prefix").equals("ALI")|| rs.getString("prefix").equals("ALO"))){
-                if (rs.getInt("id") == num) {
+            if (rs.next() && (rs.getString("prefix").equals("ALI")|| rs.getString("prefix").equals("ALO"))){
                     String user = rs.getString("admin_username");
                     String deskripsi = "";
                     if (rs.getString("Activity").equals("Login")){
@@ -1834,14 +1858,12 @@ public class AdminFrame extends javax.swing.JFrame {
                     }
                     actUser.setText(user);
                     actDesk.setText(deskripsi);
-                }
             }
             
-            String sql2 = "SELECT * FROM item_entry_details WHERE prefix = '"+text+"'";
+            String sql2 = "SELECT * FROM item_entry_details WHERE id = '"+num+"'";
             ResultSet rs2 = st.executeQuery(sql2);
             
-            while (rs2.next() && (rs2.getString("prefix").equals("IE"))) {
-                if (rs2.getInt("id") == num){
+            if (rs2.next() && (rs2.getString("prefix").equals("IE"))) {
                     String user = rs2.getString("admin_username");
                     String KODE = String.valueOf(rs2.getInt("kode"));
                     ResultSet rs4 = st.executeQuery("SELECT * FROM barang WHERE kode = '" +KODE+ "'");
@@ -1857,8 +1879,8 @@ public class AdminFrame extends javax.swing.JFrame {
                         actTime.setText(time);
                     }
                     actUser.setText(user);
-                }
             }
+            
             rs.close();
             rs2.close();
             st.close();
