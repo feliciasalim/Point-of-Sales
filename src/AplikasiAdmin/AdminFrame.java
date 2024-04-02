@@ -35,26 +35,14 @@ public class AdminFrame extends javax.swing.JFrame {
     public AdminFrame() {
         setUndecorated(true);
         initComponents();
-        
-//        DefaultTableCellRenderer centerRenderer1 = new DefaultTableCellRenderer(); 
-//        centerRenderer1.setHorizontalAlignment(SwingConstants.CENTER);
-//        tabelActivity.setDefaultRenderer(String.class, centerRenderer1);
-//        tabelActivity.setDefaultRenderer(Integer.class, centerRenderer1);
+
         tabelActivity.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabelActivity.getTableHeader().setBackground(Color.decode("#FFE100"));
         
-//        DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer(); 
-//        centerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
-//        tabeltrans.setDefaultRenderer(String.class, centerRenderer2);
-//        tabeltrans.setDefaultRenderer(Integer.class, centerRenderer2);
         tabeltrans.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabeltrans.getTableHeader().setBackground(Color.decode("#FFE100"));
         
-//        DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer(); 
-//        centerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
-//        tabeldetail.setDefaultRenderer(String.class, centerRenderer3);
-//        tabeldetail.setDefaultRenderer(Integer.class, centerRenderer3);
-//        tabeldetail.setDefaultRenderer(Float.class, centerRenderer3);
+
         tabeldetail.getTableHeader().setFont(new Font("Montserrat Semi Bold", Font.BOLD, 14));
         tabeldetail.getTableHeader().setBackground(Color.decode("#FFE100"));
         
@@ -1541,6 +1529,9 @@ public class AdminFrame extends javax.swing.JFrame {
                 int rowsInserted = stmt.executeUpdate();
                 if (rowsInserted > 0) {
                     System.out.println("SUCCESS");
+                    jtxtkodebarang.setText("");
+                    jtxthargabarang.setText("");
+                    jtxtnamabarang.setText("");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -1622,6 +1613,7 @@ public class AdminFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tabeltransMouseClicked
 
     private void Confirm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Confirm2ActionPerformed
+        DBConnector.initDBConnection();
         if(Session.get_Username()!=null) { 
             if (jDateChooser2.getDate() != null) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -1801,8 +1793,6 @@ public class AdminFrame extends javax.swing.JFrame {
 
                 Object[] rowData = {index, kode, nama, kuantitas, harga};
                 tblModel.addRow(rowData);
-                String hargaTotal = rs.getString("harga_total");
-                transTotal.setText(String.valueOf(hargaTotal));
 
                 index++;
             }
@@ -1813,6 +1803,9 @@ public class AdminFrame extends javax.swing.JFrame {
             while (rsu.next()){
             String user = rsu.getString("username");
             transUser.setText(user);
+            String harga_total = rsu.getString("total_pembayaran");
+            transTotal.setText(harga_total);
+
             }
 
             String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM detail_transaksi WHERE id_transaksi = '" + idTransaksi + "'";
