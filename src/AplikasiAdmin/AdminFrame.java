@@ -105,7 +105,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelActivity = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -113,6 +113,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        Confirm2 = new javax.swing.JButton();
 
         jTextField1.setText("Tanggal");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -844,7 +845,7 @@ public class AdminFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel5.setText("Tanggal");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelActivity.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -852,10 +853,20 @@ public class AdminFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "No.", "Kode", "Title 3", "Title 4"
+                "No.", "Admin username", "Tanggal", "Activity"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabelActivity.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelActivityMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelActivity);
+        if (tabelActivity.getColumnModel().getColumnCount() > 0) {
+            tabelActivity.getColumnModel().getColumn(0).setMinWidth(70);
+            tabelActivity.getColumnModel().getColumn(0).setPreferredWidth(15);
+            tabelActivity.getColumnModel().getColumn(0).setMaxWidth(70);
+        }
 
         jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel6.setText("User");
@@ -872,6 +883,13 @@ public class AdminFrame extends javax.swing.JFrame {
             }
         });
 
+        Confirm2.setText("Confirm");
+        Confirm2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Confirm2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -883,7 +901,9 @@ public class AdminFrame extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Confirm2))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
@@ -907,7 +927,8 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Confirm2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -922,7 +943,7 @@ public class AdminFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Daftar Activity", jPanel3);
@@ -1058,6 +1079,54 @@ public class AdminFrame extends javax.swing.JFrame {
     }
 
     }//GEN-LAST:event_tabeltransMouseClicked
+
+    private void Confirm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Confirm2ActionPerformed
+        // TODO add your handling code here:                                       
+        if (jDateChooser2.getDate() != null) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String selectedDate = sdf.format(jDateChooser2.getDate());
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM activity_admin WHERE DATE(tanggal) = '" + selectedDate + "'";
+            ResultSet rs = st.executeQuery(sql);
+
+            DefaultTableModel tblModel = (DefaultTableModel) tabelActivity.getModel();
+            tblModel.setRowCount(0);
+
+            int index = 1;
+
+            while (rs.next()) {
+                String activity = String.valueOf(rs.getInt("Activity"));
+                Object[] rowData = {index, activity};
+                tblModel.addRow(rowData);
+
+                index++;
+            }
+            st.close();
+            con.close();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    } else {
+        System.out.println("No date is chosen.");
+    }
+        
+    }//GEN-LAST:event_Confirm2ActionPerformed
+
+    private void tabelActivityMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelActivityMouseClicked
+        // TODO add your handling code here:
+        int index = tabelActivity.getSelectedRow();
+         if (index != -1) {
+            DefaultTableModel model = (DefaultTableModel) tabelActivity.getModel();
+            String activity = model.getValueAt(index, 1).toString();
+        
+        
+        fetchAndPopulateTransactionDetails(activity);
+      }
+    }//GEN-LAST:event_tabelActivityMouseClicked
 private void fetchAndPopulateTransactionDetails(String idTransaksi) {
     try {
         DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
@@ -1112,6 +1181,61 @@ private void fetchAndPopulateTransactionDetails(String idTransaksi) {
         JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+//private void fetchAndPopulateTransactionDetails(String idTransaksi) {
+//    try {
+//        DefaultTableModel tblModel = (DefaultTableModel) tabeldetail.getModel();
+//        tblModel.setRowCount(0);
+//        
+//        Class.forName("com.mysql.cj.jdbc.Driver");
+//        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/pos_db", "root", "");
+//        Statement st = con.createStatement();
+//        String sql = "SELECT * FROM detail_transaksi WHERE id_transaksi = '"+idTransaksi+"'";
+//        ResultSet rs = st.executeQuery(sql);
+//        tblModel.setRowCount(0);
+//
+//        int index = 1;
+//        while (rs.next()) {
+//            String kode = rs.getString("kode");
+//            String nama = rs.getString("nama");
+//            String kuantitas = rs.getString("qty");
+//            String harga = rs.getString("harga");
+//            
+//            
+//            Object[] rowData = {index, kode, nama, kuantitas, harga};
+//            tblModel.addRow(rowData);
+//            String hargaTotal = rs.getString("harga_total");
+//            transTotal.setText(String.valueOf(hargaTotal));
+//            
+//            index++;
+//        }
+//        
+//        int num = Integer.parseInt(idTransaksi.replaceAll("\\D", ""));
+//        String sqluser = "SELECT * FROM transaksi WHERE id_transaksi = '"+num+"'";
+//        ResultSet rsu = st.executeQuery(sqluser);
+//       
+//        while (rsu.next()){
+//        String user = rsu.getString("username");
+//        transUser.setText(user);
+//        }
+//        
+//        String sqlwaktu = "SELECT TIME(tanggal) AS waktu FROM detail_transaksi WHERE id_transaksi = '" + idTransaksi + "'";
+//        ResultSet rsw = st.executeQuery(sqlwaktu);
+//        while (rsw.next()) {
+//        String time = rsw.getString("waktu");
+//        transTime.setText(time);
+//    }
+//
+//        
+//        rsu.close();
+//        rs.close();
+//        st.close();
+//        con.close();
+//    } catch (ClassNotFoundException | SQLException ex) {
+//        ex.printStackTrace();
+//        JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+//}
     /**
      * @param args the command line arguments
      */
@@ -1149,6 +1273,7 @@ private void fetchAndPopulateTransactionDetails(String idTransaksi) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Confirm;
+    private javax.swing.JButton Confirm2;
     private javax.swing.JCheckBox jCheckBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
@@ -1204,7 +1329,6 @@ private void fetchAndPopulateTransactionDetails(String idTransaksi) {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField6;
@@ -1213,6 +1337,7 @@ private void fetchAndPopulateTransactionDetails(String idTransaksi) {
     private javax.swing.JTextField jtxtkodebarang;
     private javax.swing.JTextField jtxtnamabarang;
     private javax.swing.JButton submititem;
+    private javax.swing.JTable tabelActivity;
     private javax.swing.JTable tabeldetail;
     private javax.swing.JTable tabeltrans;
     private javax.swing.JTextField transTime;
